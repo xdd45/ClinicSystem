@@ -1,11 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
 
-<VBox alignment="CENTER" spacing="20"
-      xmlns:fx="http://javafx.com/fxml">
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.clinic.controller.DashboardController"
+            style="-fx-background-color: #F8FAFC;">
 
-    <Label text="Welcome to Dashboard"/>
-    
-</VBox>
+    <!-- SIDEBAR -->
+    <left>
+        <VBox prefWidth="240" styleClass="sidebar">
+
+            <!-- Header -->
+            <VBox styleClass="sidebar-header" spacing="4">
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <StackPane>
+                        <Circle radius="20"
+                                style="-fx-fill: #1D4ED8;"/>
+                        <Label text="🏥" style="-fx-font-size: 16px;"/>
+                    </StackPane>
+                    <VBox>
+                        <Label text="BHC System"
+                               style="-fx-font-size: 15px; -fx-font-weight: bold;
+                                      -fx-text-fill: white;"/>
+                        <Label fx:id="roleLabel"
+                               style="-fx-font-size: 11px; -fx-text-fill: #60A5FA;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- User Info -->
+            <HBox spacing="10" alignment="CENTER_LEFT"
+                  style="-fx-padding: 16 16 8 16; -fx-background-color: #1E293B;">
+                <StackPane>
+                    <Circle radius="18"
+                            style="-fx-fill: #334155;"/>
+                    <Label text="👤" style="-fx-font-size: 14px;"/>
+                </StackPane>
+                <VBox>
+                    <Label fx:id="userLabel"
+                           style="-fx-font-size: 12px; -fx-text-fill: #F1F5F9;
+                                  -fx-font-weight: bold;"/>
+                    <Label text="Active Session"
+                           style="-fx-font-size: 10px; -fx-text-fill: #10B981;"/>
+                </VBox>
+            </HBox>
+
+            <Separator styleClass="sidebar-separator"/>
+
+            <!-- Nav Label -->
+            <Label text="MAIN MENU"
+                   style="-fx-font-size: 10px; -fx-text-fill: #475569;
+                          -fx-padding: 16 20 8 20; -fx-font-weight: bold;"/>
+
+            <!-- Nav Buttons -->
+            <Button fx:id="btnDashboard" text="📊   Dashboard"
+                    maxWidth="Infinity" onAction="#showDashboard"
+                    styleClass="nav-btn-active"/>
+            <Button text="👥   Patients"
+                    maxWidth="Infinity" onAction="#showPatients"
+                    styleClass="nav-btn"/>
+            <Button text="📅   Appointments"
+                    maxWidth="Infinity" onAction="#showAppointments"
+                    styleClass="nav-btn"/>
+            <Button text="🩺   Medical Records"
+                    maxWidth="Infinity" onAction="#showMedicalRecords"
+                    styleClass="nav-btn"/>
+            <Button text="💊   Inventory"
+                    maxWidth="Infinity" onAction="#showInventory"
+                    styleClass="nav-btn"/>
+            <Button text="💰   Billing"
+                    maxWidth="Infinity" onAction="#showBilling"
+                    styleClass="nav-btn"/>
+            <Button text="📊   Reports"
+                    maxWidth="Infinity" onAction="#showReports"
+                    styleClass="nav-btn"/>
+
+            <Separator styleClass="sidebar-separator"
+                       style="-fx-padding: 8 0;"/>
+
+            <Label text="SYSTEM"
+                   style="-fx-font-size: 10px; -fx-text-fill: #475569;
+                          -fx-padding: 8 20; -fx-font-weight: bold;"/>
+
+            <Button text="👤   User Management"
+                    maxWidth="Infinity" onAction="#showUsers"
+                    styleClass="nav-btn"/>
+            <Button text="⚙️   Settings"
+                    maxWidth="Infinity" onAction="#showSettings"
+                    styleClass="nav-btn"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Separator styleClass="sidebar-separator"/>
+            <Button text="🚪   Sign Out"
+                    maxWidth="Infinity" onAction="#handleLogout"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #EF4444;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 14 20; -fx-font-size: 13px;
+                           -fx-cursor: hand;"/>
+        </VBox>
+    </left>
+
+    <!-- CONTENT AREA -->
+    <center>
+        <VBox>
+            <!-- Top Bar -->
+            <HBox alignment="CENTER_LEFT" spacing="16"
+                  style="-fx-background-color: white; -fx-padding: 16 24;
+                         -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.06),8,0,0,2);">
+                <Label fx:id="pageTitle" text="Dashboard"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold;
+                              -fx-text-fill: #0F172A;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="dateLabel"
+                       style="-fx-font-size: 12px; -fx-text-fill: #64748B;"/>
+                <Label fx:id="clockLabel"
+                       style="-fx-font-size: 12px; -fx-text-fill: #64748B;
+                              -fx-background-color: #F1F5F9;
+                              -fx-padding: 4 12; -fx-background-radius: 20;"/>
+            </HBox>
+
+            <!-- Content -->
+            <StackPane fx:id="contentArea"
+                       style="-fx-padding: 24;" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </center>
+</BorderPane>

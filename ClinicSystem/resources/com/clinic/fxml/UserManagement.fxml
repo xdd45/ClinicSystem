@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.clinic.controller.UserManagementController"
+      spacing="0" style="-fx-background-color: #F8FAFC;">
+
+    <!-- HEADER -->
+    <HBox alignment="CENTER_LEFT" spacing="16"
+          style="-fx-padding: 0 0 20 0;">
+        <VBox>
+            <Label text="User Management"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;
+                          -fx-text-fill: #0F172A;"/>
+            <Label text="Manage staff accounts and access levels"
+                   style="-fx-font-size: 12px; -fx-text-fill: #64748B;"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="➕  Add New User" onAction="#clearForm"
+                style="-fx-background-color: #1D4ED8; -fx-text-fill: white;
+                       -fx-padding: 10 20; -fx-background-radius: 8;
+                       -fx-cursor: hand; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <!-- TABLE -->
+        <VBox HBox.hgrow="ALWAYS" spacing="0">
+            <TableView fx:id="userTable" VBox.vgrow="ALWAYS"
+                       style="-fx-background-color: white;
+                              -fx-background-radius: 12;
+                              -fx-effect: dropshadow(gaussian,
+                                rgba(0,0,0,0.06),12,0,0,4);">
+                <columns>
+                    <TableColumn fx:id="colId"       text="ID"
+                                 prefWidth="55"/>
+                    <TableColumn fx:id="colName"     text="Full Name"
+                                 prefWidth="180"/>
+                    <TableColumn fx:id="colUsername" text="Username"
+                                 prefWidth="130"/>
+                    <TableColumn fx:id="colRole"     text="Role"
+                                 prefWidth="100"/>
+                    <TableColumn fx:id="colStatus"   text="Status"
+                                 prefWidth="100"/>
+                    <TableColumn fx:id="colCreated"  text="Created"
+                                 prefWidth="130"/>
+                </columns>
+                <placeholder>
+                    <Label text="No users found."
+                           style="-fx-text-fill: #94A3B8;"/>
+                </placeholder>
+            </TableView>
+        </VBox>
+
+        <!-- FORM -->
+        <VBox prefWidth="300" spacing="0"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 12;
+                     -fx-effect: dropshadow(gaussian,
+                       rgba(0,0,0,0.06),12,0,0,4);">
+
+            <VBox style="-fx-padding: 16 20;
+                         -fx-background-color: #1D4ED8;
+                         -fx-background-radius: 12 12 0 0;">
+                <Label fx:id="formTitle" text="New User"
+                       style="-fx-font-size: 15px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+                <Label text="Fill in user account details"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #BFDBFE;"/>
+            </VBox>
+
+            <VBox spacing="12" style="-fx-padding: 16;">
+
+                <Label text="FULL NAME *"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #64748B;
+                              -fx-font-weight: bold;"/>
+                <TextField fx:id="nameField"
+                           promptText="e.g. Maria Santos"
+                           style="-fx-padding: 10;
+                                  -fx-border-color: #E2E8F0;
+                                  -fx-border-radius: 8;
+                                  -fx-background-radius: 8;"/>
+
+                <Label text="USERNAME *"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #64748B;
+                              -fx-font-weight: bold;"/>
+                <TextField fx:id="usernameField"
+                           promptText="e.g. maria.santos"
+                           style="-fx-padding: 10;
+                                  -fx-border-color: #E2E8F0;
+                                  -fx-border-radius: 8;
+                                  -fx-background-radius: 8;"/>
+
+                <Label text="PASSWORD *"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #64748B;
+                              -fx-font-weight: bold;"/>
+                <PasswordField fx:id="passwordField"
+                               promptText="Enter password"
+                               style="-fx-padding: 10;
+                                      -fx-border-color: #E2E8F0;
+                                      -fx-border-radius: 8;
+                                      -fx-background-radius: 8;"/>
+                <Label text="Leave blank to keep existing password"
+                       style="-fx-font-size: 10px;
+                              -fx-text-fill: #94A3B8;"/>
+
+                <Label text="ROLE *"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #64748B;
+                              -fx-font-weight: bold;"/>
+                <ComboBox fx:id="roleCombo" maxWidth="Infinity"
+                          style="-fx-font-size: 13px;"/>
+
+                <Label text="EMAIL"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #64748B;
+                              -fx-font-weight: bold;"/>
+                <TextField fx:id="emailField"
+                           promptText="e.g. maria@clinic.com"
+                           style="-fx-padding: 10;
+                                  -fx-border-color: #E2E8F0;
+                                  -fx-border-radius: 8;
+                                  -fx-background-radius: 8;"/>
+
+                <Label text="PHONE"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #64748B;
+                              -fx-font-weight: bold;"/>
+                <TextField fx:id="phoneField"
+                           promptText="e.g. 09171234567"
+                           style="-fx-padding: 10;
+                                  -fx-border-color: #E2E8F0;
+                                  -fx-border-radius: 8;
+                                  -fx-background-radius: 8;"/>
+
+                <!-- Active toggle -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <CheckBox fx:id="activeCheck"
+                              text="Account is Active"
+                              selected="true"
+                              style="-fx-font-size: 13px;"/>
+                </HBox>
+
+                <Label fx:id="statusLabel" text="" wrapText="true"
+                       style="-fx-font-size: 12px;"/>
+
+                <Button fx:id="saveButton" text="💾  Save User"
+                        maxWidth="Infinity" onAction="#handleSave"
+                        style="-fx-background-color: #1D4ED8;
+                               -fx-text-fill: white;
+                               -fx-font-size: 13px; -fx-padding: 12;
+                               -fx-background-radius: 8;
+                               -fx-cursor: hand;
+                               -fx-font-weight: bold;"/>
+
+                <HBox spacing="8">
+                    <Button text="🔒 Reset Pwd"
+                            onAction="#handleResetPassword"
+                            HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                            style="-fx-background-color: #FEF3C7;
+                                   -fx-text-fill: #92400E;
+                                   -fx-padding: 10;
+                                   -fx-background-radius: 8;
+                                   -fx-cursor: hand;
+                                   -fx-font-size: 11px;"/>
+                    <Button text="✖ Clear"
+                            onAction="#clearForm"
+                            HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                            style="-fx-background-color: #F1F5F9;
+                                   -fx-text-fill: #475569;
+                                   -fx-padding: 10;
+                                   -fx-background-radius: 8;
+                                   -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </HBox>
+</VBox>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.clinic.controller.BillingController"
+      spacing="0" style="-fx-background-color: #F8FAFC;">
+
+    <HBox alignment="CENTER_LEFT" spacing="16"
+          style="-fx-padding: 0 0 20 0;">
+        <VBox>
+            <Label text="Billing &amp; Payments"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;
+                          -fx-text-fill: #0F172A;"/>
+            <Label text="Manage patient billing and payments"
+                   style="-fx-font-size: 12px; -fx-text-fill: #64748B;"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="totalUnpaidLabel"
+               style="-fx-background-color: #FEE2E2;
+                      -fx-text-fill: #DC2626; -fx-padding: 6 14;
+                      -fx-background-radius: 20; -fx-font-size: 12px;
+                      -fx-font-weight: bold;"/>
+        <Button text="➕  New Bill" onAction="#clearForm"
+                style="-fx-background-color: #059669;
+                       -fx-text-fill: white; -fx-padding: 10 20;
+                       -fx-background-radius: 8; -fx-cursor: hand;
+                       -fx-font-weight: bold;"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT"
+          style="-fx-padding: 0 0 16 0;">
+        <TextField fx:id="searchField"
+                   promptText="🔍  Search by patient name..."
+                   prefWidth="300"
+                   style="-fx-padding: 10 16; -fx-background-radius: 8;
+                          -fx-border-color: #E2E8F0; -fx-border-radius: 8;
+                          -fx-background-color: white;"/>
+        <ComboBox fx:id="filterStatus" promptText="All Status"
+                  style="-fx-background-radius: 8;"/>
+        <Button text="⚠️ Unpaid Only" onAction="#showUnpaid"
+                style="-fx-background-color: #FEE2E2;
+                       -fx-text-fill: #DC2626; -fx-padding: 10 16;
+                       -fx-background-radius: 8; -fx-cursor: hand;"/>
+        <Button text="🔄 Reset" onAction="#resetFilter"
+                style="-fx-background-color: #F1F5F9;
+                       -fx-text-fill: #475569; -fx-padding: 10 16;
+                       -fx-background-radius: 8; -fx-cursor: hand;"/>
+    </HBox>
+
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <!-- TABLE -->
+        <TableView fx:id="billingTable" HBox.hgrow="ALWAYS"
+                   style="-fx-background-color: white;
+                          -fx-background-radius: 12;
+                          -fx-effect: dropshadow(gaussian,
+                            rgba(0,0,0,0.06),12,0,0,4);">
+            <columns>
+                <TableColumn fx:id="colId"      text="ID"
+                             prefWidth="55"/>
+                <TableColumn fx:id="colPatient" text="Patient"
+                             prefWidth="160"/>
+                <TableColumn fx:id="colDesc"    text="Description"
+                             prefWidth="160"/>
+                <TableColumn fx:id="colAmount"  text="Amount"
+                             prefWidth="100"/>
+                <TableColumn fx:id="colPhil"    text="PhilHealth"
+                             prefWidth="100"/>
+                <TableColumn fx:id="colTotal"   text="Total Due"
+                             prefWidth="100"/>
+                <TableColumn fx:id="colStatus"  text="Status"
+                             prefWidth="100"/>
+                <TableColumn fx:id="colDate"    text="Date"
+                             prefWidth="110"/>
+            </columns>
+        </TableView>
+
+        <!-- FORM -->
+        <VBox prefWidth="300" spacing="0"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 12;
+                     -fx-effect: dropshadow(gaussian,
+                       rgba(0,0,0,0.06),12,0,0,4);">
+
+            <VBox style="-fx-padding: 16 20;
+                         -fx-background-color: #059669;
+                         -fx-background-radius: 12 12 0 0;">
+                <Label fx:id="formTitle" text="New Bill"
+                       style="-fx-font-size: 15px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+                <Label text="Enter billing details below"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #D1FAE5;"/>
+            </VBox>
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                        style="-fx-background: transparent;
+                               -fx-background-color: transparent;">
+                <VBox spacing="10" style="-fx-padding: 16;">
+
+                    <Label text="PATIENT *"
+                           style="-fx-font-size: 11px;
+                                  -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="patientCombo" maxWidth="Infinity"
+                              promptText="Select patient..."/>
+
+                    <Label text="DESCRIPTION"
+                           style="-fx-font-size: 11px;
+                                  -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <TextField fx:id="descField"
+                               promptText="e.g. Consultation Fee"
+                               style="-fx-padding: 10;
+                                      -fx-border-color: #E2E8F0;
+                                      -fx-border-radius: 8;"/>
+
+                    <Label text="AMOUNT (PHP) *"
+                           style="-fx-font-size: 11px;
+                                  -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <TextField fx:id="amountField"
+                               promptText="e.g. 150.00"
+                               style="-fx-padding: 10;
+                                      -fx-border-color: #E2E8F0;
+                                      -fx-border-radius: 8;"/>
+
+                    <Label text="DISCOUNT (PHP)"
+                           style="-fx-font-size: 11px;
+                                  -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <TextField fx:id="discountField"
+                               promptText="e.g. 0.00"
+                               style="-fx-padding: 10;
+                                      -fx-border-color: #E2E8F0;
+                                      -fx-border-radius: 8;"/>
+
+                    <!-- PhilHealth -->
+                    <CheckBox fx:id="philhealthCheck"
+                              text="PhilHealth Covered"
+                              onAction="#onPhilhealthToggle"
+                              style="-fx-font-size: 13px;"/>
+
+                    <VBox fx:id="philhealthBox" spacing="6"
+                          style="-fx-background-color: #EFF6FF;
+                                 -fx-padding: 10;
+                                 -fx-background-radius: 8;">
+                        <Label text="PHILHEALTH AMOUNT"
+                               style="-fx-font-size: 11px;
+                                      -fx-text-fill: #1D4ED8;
+                                      -fx-font-weight: bold;"/>
+                        <TextField fx:id="philhealthAmountField"
+                                   promptText="e.g. 100.00"
+                                   style="-fx-padding: 8;
+                                          -fx-border-color: #BFDBFE;
+                                          -fx-border-radius: 6;"/>
+                    </VBox>
+
+                    <Label text="PAYMENT STATUS"
+                           style="-fx-font-size: 11px;
+                                  -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="statusCombo" maxWidth="Infinity"/>
+
+                    <Label text="PAYMENT METHOD"
+                           style="-fx-font-size: 11px;
+                                  -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="methodCombo" maxWidth="Infinity"/>
+
+                    <!-- Total display -->
+                    <VBox style="-fx-background-color: #F0FDF4;
+                                 -fx-padding: 12;
+                                 -fx-background-radius: 8;">
+                        <Label fx:id="totalLabel"
+                               text="TOTAL DUE: ₱ 0.00"
+                               style="-fx-font-size: 16px;
+                                      -fx-font-weight: bold;
+                                      -fx-text-fill: #059669;"/>
+                    </VBox>
+
+                    <Label fx:id="statusLabel" text=""
+                           wrapText="true"
+                           style="-fx-font-size: 12px;"/>
+
+                    <Button fx:id="saveButton"
+                            text="💾  Save Bill"
+                            maxWidth="Infinity"
+                            onAction="#handleSave"
+                            style="-fx-background-color: #059669;
+                                   -fx-text-fill: white;
+                                   -fx-font-size: 13px; -fx-padding: 12;
+                                   -fx-background-radius: 8;
+                                   -fx-cursor: hand;
+                                   -fx-font-weight: bold;"/>
+
+                    <HBox spacing="8">
+                        <Button text="🖨️ Receipt"
+                                onAction="#printReceipt"
+                                HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                                style="-fx-background-color: #DBEAFE;
+                                       -fx-text-fill: #1D4ED8;
+                                       -fx-padding: 10;
+                                       -fx-background-radius: 8;
+                                       -fx-cursor: hand;"/>
+                        <Button text="✖ Clear"
+                                onAction="#clearForm"
+                                HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                                style="-fx-background-color: #F1F5F9;
+                                       -fx-text-fill: #475569;
+                                       -fx-padding: 10;
+                                       -fx-background-radius: 8;
+                                       -fx-cursor: hand;"/>
+                    </HBox>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </HBox>
+</VBox>

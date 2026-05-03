@@ -1,0 +1,219 @@
+/* ============================================
+   CLINIC SYSTEM - PROFESSIONAL THEME
+   Barangay Health Center Management System
+   ============================================ */
+
+/* === FONTS === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    -fx-font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+.root {
+    -fx-background-color: #F8FAFC;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* === SIDEBAR === */
+.sidebar {
+    -fx-background-color: #0F172A;
+}
+
+.sidebar-header {
+    -fx-background-color: #1E293B;
+    -fx-padding: 20 16;
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #94A3B8;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12 20;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-graphic-text-gap: 10;
+}
+
+.nav-btn:hover {
+    -fx-background-color: #1E293B;
+    -fx-text-fill: #F1F5F9;
+}
+
+.nav-btn-active {
+    -fx-background-color: #1D4ED8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12 20;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0 8 8 0;
+}
+
+/* === CARDS === */
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 4);
+}
+
+.card-blue   { -fx-border-color: #3B82F6; -fx-border-width: 0 0 0 4; -fx-border-radius: 0 12 12 0; }
+.card-green  { -fx-border-color: #10B981; -fx-border-width: 0 0 0 4; -fx-border-radius: 0 12 12 0; }
+.card-orange { -fx-border-color: #F59E0B; -fx-border-width: 0 0 0 4; -fx-border-radius: 0 12 12 0; }
+.card-purple { -fx-border-color: #8B5CF6; -fx-border-width: 0 0 0 4; -fx-border-radius: 0 12 12 0; }
+.card-red    { -fx-border-color: #EF4444; -fx-border-width: 0 0 0 4; -fx-border-radius: 0 12 12 0; }
+
+/* === BUTTONS === */
+.btn-primary {
+    -fx-background-color: #1D4ED8;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+.btn-primary:hover { -fx-background-color: #1E40AF; }
+
+.btn-success {
+    -fx-background-color: #10B981;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.btn-success:hover { -fx-background-color: #059669; }
+
+.btn-danger {
+    -fx-background-color: #EF4444;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.btn-danger:hover { -fx-background-color: #DC2626; }
+
+.btn-secondary {
+    -fx-background-color: #F1F5F9;
+    -fx-text-fill: #475569;
+    -fx-font-size: 13px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.btn-secondary:hover { -fx-background-color: #E2E8F0; }
+
+/* === FORM FIELDS === */
+.field-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #64748B;
+    -fx-font-weight: bold;
+}
+
+.text-input {
+    -fx-background-color: #F8FAFC;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: #0F172A;
+}
+.text-input:focused {
+    -fx-border-color: #3B82F6;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.15), 8, 0, 0, 0);
+}
+
+/* === TABLE === */
+.table-view {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 12, 0, 0, 4);
+}
+.table-view .column-header-background {
+    -fx-background-color: #F1F5F9;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #475569;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding: 12 16;
+}
+.table-row-cell { -fx-cell-size: 48px; }
+.table-row-cell:odd  { -fx-background-color: #FAFAFA; }
+.table-row-cell:even { -fx-background-color: white; }
+.table-row-cell:selected {
+    -fx-background-color: #EFF6FF;
+    -fx-text-fill: #1D4ED8;
+}
+.table-row-cell:hover { -fx-background-color: #F0F9FF; }
+
+/* === STATUS BADGES === */
+.badge-success {
+    -fx-background-color: #D1FAE5;
+    -fx-text-fill: #065F46;
+    -fx-background-radius: 20;
+    -fx-padding: 4 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+.badge-warning {
+    -fx-background-color: #FEF3C7;
+    -fx-text-fill: #92400E;
+    -fx-background-radius: 20;
+    -fx-padding: 4 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+.badge-danger {
+    -fx-background-color: #FEE2E2;
+    -fx-text-fill: #991B1B;
+    -fx-background-radius: 20;
+    -fx-padding: 4 12;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+/* === PAGE TITLES === */
+.page-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F172A;
+}
+.page-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #64748B;
+}
+
+/* === SEARCH BAR === */
+.search-field {
+    -fx-background-color: white;
+    -fx-border-color: #E2E8F0;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10 16;
+    -fx-font-size: 13px;
+    -fx-prompt-text-fill: #94A3B8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.04), 8, 0, 0, 2);
+}
+.search-field:focused {
+    -fx-border-color: #3B82F6;
+    -fx-effect: dropshadow(gaussian, rgba(59,130,246,0.2), 10, 0, 0, 0);
+}
+
+/* === SEPARATOR === */
+.sidebar-separator {
+    -fx-background-color: #1E293B;
+    -fx-padding: 0;
+}
+
+/* === SCROLL BAR (hide ugly default) === */
+.scroll-bar { -fx-opacity: 0.4; }
+.scroll-bar:hover { -fx-opacity: 1; }

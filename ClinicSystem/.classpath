@@ -12,6 +12,8 @@
 	<classpathentry kind="lib" path="C:/Users/user/Downloads/okio-3.6.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user/Downloads/okhttp-4.12.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user/Downloads/postgresql-42.7.10.jar"/>
+	<classpathentry kind="lib" path="lib/jbcrypt-0.4.jar"/>
+	<classpathentry kind="lib" path="lib/postgresql-42.7.11.jar"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -57,5 +59,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/postgresql-42.7.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Downloads/itextpdf-5.5.13.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

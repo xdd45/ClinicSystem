@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.clinic.controller.ReportsController"
+      spacing="20" style="-fx-background-color: #F8FAFC; -fx-padding: 4;">
+
+    <HBox alignment="CENTER_LEFT">
+        <VBox>
+            <Label text="Reports &amp; Analytics"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;
+                          -fx-text-fill: #0F172A;"/>
+            <Label text="Generate and export clinic reports as PDF"
+                   style="-fx-font-size: 12px; -fx-text-fill: #64748B;"/>
+        </VBox>
+    </HBox>
+
+    <!-- SUMMARY CARDS -->
+    <HBox spacing="16" fx:id="summaryCards"/>
+
+    <!-- REPORT BUTTONS -->
+    <Label text="GENERATE REPORTS"
+           style="-fx-font-size: 12px; -fx-font-weight: bold;
+                  -fx-text-fill: #64748B;"/>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <DatePicker fx:id="fromDate" promptText="From Date"/>
+        <DatePicker fx:id="toDate"   promptText="To Date"/>
+        <Button text="📊 Patient Report" onAction="#generatePatientReport"
+                style="-fx-background-color: #3B82F6; -fx-text-fill: white;
+                       -fx-padding: 10 20; -fx-background-radius: 8;
+                       -fx-cursor: hand; -fx-font-weight: bold;"/>
+        <Button text="📅 Appointment Report" onAction="#generateAppointmentReport"
+                style="-fx-background-color: #10B981; -fx-text-fill: white;
+                       -fx-padding: 10 20; -fx-background-radius: 8;
+                       -fx-cursor: hand; -fx-font-weight: bold;"/>
+        <Button text="💊 Inventory Report" onAction="#generateInventoryReport"
+                style="-fx-background-color: #F59E0B; -fx-text-fill: white;
+                       -fx-padding: 10 20; -fx-background-radius: 8;
+                       -fx-cursor: hand; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <Label fx:id="statusLabel" text=""
+           style="-fx-font-size: 13px;"/>
+
+    <!-- PREVIEW TABLE -->
+    <Label text="PREVIEW"
+           style="-fx-font-size: 12px; -fx-font-weight: bold;
+                  -fx-text-fill: #64748B;"/>
+    <TableView fx:id="previewTable" VBox.vgrow="ALWAYS"
+               style="-fx-background-color: white; -fx-background-radius: 12;
+                      -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.06),12,0,0,4);">
+        <placeholder>
+            <Label text="Select a report type above to preview data."
+                   style="-fx-text-fill: #94A3B8;"/>
+        </placeholder>
+    </TableView>
+</VBox>

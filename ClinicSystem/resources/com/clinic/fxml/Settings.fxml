@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.clinic.controller.SettingsController"
+      spacing="20" style="-fx-background-color: #F8FAFC;">
+
+    <HBox alignment="CENTER_LEFT">
+        <VBox>
+            <Label text="Clinic Settings"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;
+                          -fx-text-fill: #0F172A;"/>
+            <Label text="Configure your clinic information"
+                   style="-fx-font-size: 12px; -fx-text-fill: #64748B;"/>
+        </VBox>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                style="-fx-background: transparent;
+                       -fx-background-color: transparent;">
+        <VBox spacing="16" style="-fx-padding: 4;">
+
+            <!-- CLINIC INFO CARD -->
+            <VBox spacing="12"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 12; -fx-padding: 20;
+                         -fx-effect: dropshadow(gaussian,
+                           rgba(0,0,0,0.06),12,0,0,4);">
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="🏥"
+                           style="-fx-font-size: 18px;"/>
+                    <Label text="Clinic Information"
+                           style="-fx-font-size: 15px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #0F172A;"/>
+                </HBox>
+                <Separator/>
+
+                <HBox spacing="16">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="CLINIC NAME"
+                               style="-fx-font-size: 11px;
+                                      -fx-text-fill: #64748B;
+                                      -fx-font-weight: bold;"/>
+                        <TextField fx:id="clinicNameField"
+                                   style="-fx-padding: 10;
+                                          -fx-border-color: #E2E8F0;
+                                          -fx-border-radius: 8;
+                                          -fx-background-radius: 8;"/>
+                    </VBox>
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="TAGLINE"
+                               style="-fx-font-size: 11px;
+                                      -fx-text-fill: #64748B;
+                                      -fx-font-weight: bold;"/>
+                        <TextField fx:id="taglineField"
+                                   promptText="e.g. Serving our community"
+                                   style="-fx-padding: 10;
+                                          -fx-border-color: #E2E8F0;
+                                          -fx-border-radius: 8;
+                                          -fx-background-radius: 8;"/>
+                    </VBox>
+                </HBox>
+
+                <VBox spacing="6">
+                    <Label text="ADDRESS"
+                           style="-fx-font-size: 11px;
+                                  -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <TextArea fx:id="addressArea" prefRowCount="2"
+                              style="-fx-border-color: #E2E8F0;
+                                     -fx-border-radius: 8;"/>
+                </VBox>
+
+                <HBox spacing="16">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="CONTACT NUMBER"
+                               style="-fx-font-size: 11px;
+                                      -fx-text-fill: #64748B;
+                                      -fx-font-weight: bold;"/>
+                        <TextField fx:id="contactField"
+                                   style="-fx-padding: 10;
+                                          -fx-border-color: #E2E8F0;
+                                          -fx-border-radius: 8;
+                                          -fx-background-radius: 8;"/>
+                    </VBox>
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="EMAIL"
+                               style="-fx-font-size: 11px;
+                                      -fx-text-fill: #64748B;
+                                      -fx-font-weight: bold;"/>
+                        <TextField fx:id="emailField"
+                                   style="-fx-padding: 10;
+                                          -fx-border-color: #E2E8F0;
+                                          -fx-border-radius: 8;
+                                          -fx-background-radius: 8;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- DOCTOR INFO CARD -->
+            <VBox spacing="12"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 12; -fx-padding: 20;
+                         -fx-effect: dropshadow(gaussian,
+                           rgba(0,0,0,0.06),12,0,0,4);">
+
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="👨‍⚕️"
+                           style="-fx-font-size: 18px;"/>
+                    <Label text="Doctor / Physician Information"
+                           style="-fx-font-size: 15px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #0F172A;"/>
+                </HBox>
+                <Separator/>
+
+                <HBox spacing="16">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="DOCTOR NAME"
+                               style="-fx-font-size: 11px;
+                                      -fx-text-fill: #64748B;
+                                      -fx-font-weight: bold;"/>
+                        <TextField fx:id="doctorNameField"
+                                   promptText="e.g. Dr. Maria Santos"
+                                   style="-fx-padding: 10;
+                                          -fx-border-color: #E2E8F0;
+                                          -fx-border-radius: 8;
+                                          -fx-background-radius: 8;"/>
+                    </VBox>
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="LICENSE NUMBER"
+                               style="-fx-font-size: 11px;
+                                      -fx-text-fill: #64748B;
+                                      -fx-font-weight: bold;"/>
+                        <TextField fx:id="licenseField"
+                                   promptText="e.g. PRC-12345"
+                                   style="-fx-padding: 10;
+                                          -fx-border-color: #E2E8F0;
+                                          -fx-border-radius: 8;
+                                          -fx-background-radius: 8;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- STATUS + SAVE -->
+            <Label fx:id="statusLabel" text="" wrapText="true"
+                   style="-fx-font-size: 13px;"/>
+
+            <HBox spacing="12">
+                <Button text="💾  Save Settings"
+                        onAction="#handleSave"
+                        style="-fx-background-color: #1D4ED8;
+                               -fx-text-fill: white;
+                               -fx-font-size: 13px; -fx-padding: 12 24;
+                               -fx-background-radius: 8;
+                               -fx-cursor: hand;
+                               -fx-font-weight: bold;"/>
+                <Button text="🔄  Reload"
+                        onAction="#loadSettings"
+                        style="-fx-background-color: #F1F5F9;
+                               -fx-text-fill: #475569;
+                               -fx-font-size: 13px; -fx-padding: 12 24;
+                               -fx-background-radius: 8;
+                               -fx-cursor: hand;"/>
+            </HBox>
+
+            <!-- SYSTEM INFO CARD -->
+            <VBox spacing="10"
+                  style="-fx-background-color: white;
+                         -fx-background-radius: 12; -fx-padding: 20;
+                         -fx-effect: dropshadow(gaussian,
+                           rgba(0,0,0,0.06),12,0,0,4);">
+                <Label text="ℹ️  System Information"
+                       style="-fx-font-size: 15px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #0F172A;"/>
+                <Separator/>
+                <Label text="System: BHC Management System v2.0"
+                       style="-fx-font-size: 12px;
+                              -fx-text-fill: #64748B;"/>
+                <Label text="Database: Supabase PostgreSQL"
+                       style="-fx-font-size: 12px;
+                              -fx-text-fill: #64748B;"/>
+                <Label text="Developer: Computer Engineering Thesis Project"
+                       style="-fx-font-size: 12px;
+                              -fx-text-fill: #64748B;"/>
+                <Label fx:id="dbStatusLabel"
+                       text="🟢 Database Connected"
+                       style="-fx-font-size: 12px;
+                              -fx-text-fill: #059669;
+                              -fx-font-weight: bold;"/>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</VBox>

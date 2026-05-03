@@ -1,17 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
 
-<VBox spacing="10" alignment="CENTER"
-      xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.clinic.controller.LoginController">
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.clinic.controller.LoginController"
+           prefWidth="900" prefHeight="580">
 
-    <TextField fx:id="usernameField" promptText="Username"/>
+    <!-- LEFT PANEL - Branding -->
+    <HBox>
+        <VBox prefWidth="420" alignment="CENTER" spacing="20"
+              style="-fx-background-color: #0F172A; -fx-padding: 60;">
 
-    <PasswordField fx:id="passwordField" promptText="Password"/>
+            <!-- Logo Circle -->
+            <StackPane>
+                <Circle radius="50"
+                        style="-fx-fill: #1D4ED8;"/>
+                <Label text="🏥" style="-fx-font-size: 40px;"/>
+            </StackPane>
 
-    <Button text="Login" onAction="#handleLogin"/>
+            <VBox alignment="CENTER" spacing="8">
+                <Label text="BHC System"
+                       style="-fx-font-size: 28px; -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+                <Label text="Barangay Health Center"
+                       style="-fx-font-size: 14px; -fx-text-fill: #60A5FA;"/>
+                <Label text="Management System"
+                       style="-fx-font-size: 14px; -fx-text-fill: #60A5FA;"/>
+            </VBox>
 
-</VBox>
+            <Separator style="-fx-background-color: #1E293B;"/>
+
+            <!-- Feature bullets -->
+            <VBox spacing="14" style="-fx-padding: 10 0;">
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <Label text="✓" style="-fx-text-fill: #10B981; -fx-font-weight: bold;"/>
+                    <Label text="Patient Records Management"
+                           style="-fx-text-fill: #CBD5E1; -fx-font-size: 13px;"/>
+                </HBox>
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <Label text="✓" style="-fx-text-fill: #10B981; -fx-font-weight: bold;"/>
+                    <Label text="Appointment Scheduling"
+                           style="-fx-text-fill: #CBD5E1; -fx-font-size: 13px;"/>
+                </HBox>
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <Label text="✓" style="-fx-text-fill: #10B981; -fx-font-weight: bold;"/>
+                    <Label text="Medical Records &amp; History"
+                           style="-fx-text-fill: #CBD5E1; -fx-font-size: 13px;"/>
+                </HBox>
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <Label text="✓" style="-fx-text-fill: #10B981; -fx-font-weight: bold;"/>
+                    <Label text="Billing &amp; PhilHealth Support"
+                           style="-fx-text-fill: #CBD5E1; -fx-font-size: 13px;"/>
+                </HBox>
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <Label text="✓" style="-fx-text-fill: #10B981; -fx-font-weight: bold;"/>
+                    <Label text="Reports &amp; Analytics"
+                           style="-fx-text-fill: #CBD5E1; -fx-font-size: 13px;"/>
+                </HBox>
+            </VBox>
+
+            <Label text="v2.0 — Professional Edition"
+                   style="-fx-font-size: 10px; -fx-text-fill: #334155;
+                          -fx-padding: 20 0 0 0;"/>
+        </VBox>
+
+        <!-- RIGHT PANEL - Login Form -->
+        <VBox prefWidth="480" alignment="CENTER" spacing="0"
+              style="-fx-background-color: #F8FAFC; -fx-padding: 60 50;">
+
+            <VBox spacing="6" style="-fx-padding: 0 0 32 0;">
+                <Label text="Welcome back 👋"
+                       style="-fx-font-size: 26px; -fx-font-weight: bold;
+                              -fx-text-fill: #0F172A;"/>
+                <Label text="Sign in to your account to continue"
+                       style="-fx-font-size: 13px; -fx-text-fill: #64748B;"/>
+            </VBox>
+
+            <!-- Username -->
+            <VBox spacing="6" style="-fx-padding: 0 0 16 0;">
+                <Label text="USERNAME" styleClass="field-label"/>
+                <TextField fx:id="usernameField"
+                           promptText="Enter your username"
+                           styleClass="text-input" maxWidth="Infinity"/>
+            </VBox>
+
+            <!-- Password -->
+            <VBox spacing="6" style="-fx-padding: 0 0 8 0;">
+                <Label text="PASSWORD" styleClass="field-label"/>
+                <PasswordField fx:id="passwordField"
+                               promptText="Enter your password"
+                               styleClass="text-input" maxWidth="Infinity"/>
+            </VBox>
+
+            <!-- Error -->
+            <Label fx:id="errorLabel" text="" wrapText="true"
+                   maxWidth="Infinity"
+                   style="-fx-text-fill: #EF4444; -fx-font-size: 12px;
+                          -fx-padding: 8 12; -fx-background-color: #FEE2E2;
+                          -fx-background-radius: 6;"/>
+
+            <!-- Login Button -->
+            <Button fx:id="loginButton" text="Sign In →"
+                    maxWidth="Infinity" onAction="#handleLogin"
+                    style="-fx-background-color: #1D4ED8; -fx-text-fill: white;
+                           -fx-font-size: 14px; -fx-padding: 14;
+                           -fx-background-radius: 8; -fx-cursor: hand;
+                           -fx-font-weight: bold; -fx-margin: 16 0 0 0;"/>
+
+            <Label text="Default credentials: admin / password"
+                   style="-fx-font-size: 11px; -fx-text-fill: #94A3B8;
+                          -fx-padding: 16 0 0 0;"/>
+
+            <!-- Footer -->
+            <VBox alignment="CENTER" style="-fx-padding: 40 0 0 0;">
+                <Separator/>
+                <Label text="🔒 Secured by BCrypt Encryption  |  Cloud-Synced via Supabase"
+                       style="-fx-font-size: 10px; -fx-text-fill: #CBD5E1;
+                              -fx-padding: 12 0 0 0;"/>
+            </VBox>
+        </VBox>
+    </HBox>
+</StackPane>

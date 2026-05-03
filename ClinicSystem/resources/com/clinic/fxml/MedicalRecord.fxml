@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.clinic.controller.MedicalRecordController"
+      spacing="0" style="-fx-background-color: #F8FAFC;">
+
+    <!-- HEADER -->
+    <HBox alignment="CENTER_LEFT" spacing="16"
+          style="-fx-padding: 0 0 20 0;">
+        <VBox>
+            <Label text="Medical Records"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;
+                          -fx-text-fill: #0F172A;"/>
+            <Label text="Patient visit history, diagnoses and prescriptions"
+                   style="-fx-font-size: 12px; -fx-text-fill: #64748B;"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="➕  New Record" onAction="#clearForm"
+                style="-fx-background-color: #8B5CF6; -fx-text-fill: white;
+                       -fx-padding: 10 20; -fx-background-radius: 8;
+                       -fx-cursor: hand; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- SEARCH -->
+    <HBox spacing="10" alignment="CENTER_LEFT"
+          style="-fx-padding: 0 0 16 0;">
+        <TextField fx:id="searchField"
+                   promptText="🔍  Search by patient name..."
+                   prefWidth="300"
+                   style="-fx-padding: 10 16; -fx-background-radius: 8;
+                          -fx-border-color: #E2E8F0; -fx-border-radius: 8;
+                          -fx-background-color: white;"/>
+        <DatePicker fx:id="filterDate" promptText="Filter by date"/>
+        <Button text="🔄 Reset" onAction="#resetFilter"
+                style="-fx-background-color: #F1F5F9; -fx-text-fill: #475569;
+                       -fx-padding: 10 16; -fx-background-radius: 8;
+                       -fx-cursor: hand;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="countLabel"
+               style="-fx-font-size: 12px; -fx-text-fill: #64748B;"/>
+    </HBox>
+
+    <!-- CONTENT -->
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <!-- TABLE -->
+        <TableView fx:id="recordTable" HBox.hgrow="ALWAYS"
+                   style="-fx-background-color: white; -fx-background-radius: 12;
+                          -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.06),12,0,0,4);">
+            <columns>
+                <TableColumn fx:id="colId"        text="ID"        prefWidth="55"/>
+                <TableColumn fx:id="colPatient"   text="Patient"   prefWidth="160"/>
+                <TableColumn fx:id="colDate"      text="Visit Date" prefWidth="120"/>
+                <TableColumn fx:id="colComplaint" text="Complaint" prefWidth="160"/>
+                <TableColumn fx:id="colDiagnosis" text="Diagnosis" prefWidth="160"/>
+                <TableColumn fx:id="colBP"        text="BP"        prefWidth="80"/>
+                <TableColumn fx:id="colTemp"      text="Temp"      prefWidth="80"/>
+            </columns>
+            <placeholder>
+                <Label text="No medical records found."
+                       style="-fx-text-fill: #94A3B8;"/>
+            </placeholder>
+        </TableView>
+
+        <!-- FORM -->
+        <VBox prefWidth="320" spacing="0"
+              style="-fx-background-color: white; -fx-background-radius: 12;
+                     -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.06),12,0,0,4);">
+
+            <VBox style="-fx-padding: 16 20; -fx-background-color: #8B5CF6;
+                         -fx-background-radius: 12 12 0 0;">
+                <Label fx:id="formTitle" text="New Medical Record"
+                       style="-fx-font-size: 15px; -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+                <Label text="Record patient visit details"
+                       style="-fx-font-size: 11px; -fx-text-fill: #EDE9FE;"/>
+            </VBox>
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                        style="-fx-background: transparent;
+                               -fx-background-color: transparent;">
+                <VBox spacing="10" style="-fx-padding: 16;">
+
+                    <Label text="PATIENT *"
+                           style="-fx-font-size: 11px; -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <ComboBox fx:id="patientCombo" maxWidth="Infinity"
+                              promptText="Select patient..."/>
+
+                    <Label text="VISIT DATE *"
+                           style="-fx-font-size: 11px; -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <DatePicker fx:id="visitDatePicker" maxWidth="Infinity"/>
+
+                    <!-- VITALS -->
+                    <Label text="── VITALS ──────────────"
+                           style="-fx-font-size: 11px; -fx-text-fill: #8B5CF6;
+                                  -fx-font-weight: bold;"/>
+
+                    <HBox spacing="8">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="BLOOD PRESSURE"
+                                   style="-fx-font-size: 10px; -fx-text-fill: #64748B;"/>
+                            <TextField fx:id="bpField" promptText="e.g. 120/80"
+                                       style="-fx-padding: 8; -fx-border-color: #E2E8F0;
+                                              -fx-border-radius: 6;"/>
+                        </VBox>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="TEMPERATURE (°C)"
+                                   style="-fx-font-size: 10px; -fx-text-fill: #64748B;"/>
+                            <TextField fx:id="tempField" promptText="e.g. 36.5"
+                                       style="-fx-padding: 8; -fx-border-color: #E2E8F0;
+                                              -fx-border-radius: 6;"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="8">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="WEIGHT (kg)"
+                                   style="-fx-font-size: 10px; -fx-text-fill: #64748B;"/>
+                            <TextField fx:id="weightField" promptText="e.g. 60"
+                                       style="-fx-padding: 8; -fx-border-color: #E2E8F0;
+                                              -fx-border-radius: 6;"/>
+                        </VBox>
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="HEIGHT (cm)"
+                                   style="-fx-font-size: 10px; -fx-text-fill: #64748B;"/>
+                            <TextField fx:id="heightField" promptText="e.g. 165"
+                                       style="-fx-padding: 8; -fx-border-color: #E2E8F0;
+                                              -fx-border-radius: 6;"/>
+                        </VBox>
+                    </HBox>
+
+                    <Label text="── CLINICAL ─────────────"
+                           style="-fx-font-size: 11px; -fx-text-fill: #8B5CF6;
+                                  -fx-font-weight: bold;"/>
+
+                    <Label text="CHIEF COMPLAINT"
+                           style="-fx-font-size: 11px; -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <TextArea fx:id="complaintArea" prefRowCount="2"
+                              promptText="Patient's main complaint..."
+                              style="-fx-border-color: #E2E8F0; -fx-border-radius: 6;"/>
+
+                    <Label text="DIAGNOSIS"
+                           style="-fx-font-size: 11px; -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <TextArea fx:id="diagnosisArea" prefRowCount="2"
+                              promptText="Doctor's diagnosis..."
+                              style="-fx-border-color: #E2E8F0; -fx-border-radius: 6;"/>
+
+                    <Label text="PRESCRIPTION"
+                           style="-fx-font-size: 11px; -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <TextArea fx:id="prescriptionArea" prefRowCount="2"
+                              promptText="Medicines prescribed..."
+                              style="-fx-border-color: #E2E8F0; -fx-border-radius: 6;"/>
+
+                    <Label text="NOTES"
+                           style="-fx-font-size: 11px; -fx-text-fill: #64748B;
+                                  -fx-font-weight: bold;"/>
+                    <TextArea fx:id="notesArea" prefRowCount="2"
+                              promptText="Additional notes..."
+                              style="-fx-border-color: #E2E8F0; -fx-border-radius: 6;"/>
+
+                    <Label fx:id="statusLabel" text="" wrapText="true"
+                           style="-fx-font-size: 12px;"/>
+
+                    <Button fx:id="saveButton" text="💾  Save Record"
+                            maxWidth="Infinity" onAction="#handleSave"
+                            style="-fx-background-color: #8B5CF6;
+                                   -fx-text-fill: white; -fx-font-size: 13px;
+                                   -fx-padding: 12; -fx-background-radius: 8;
+                                   -fx-cursor: hand; -fx-font-weight: bold;"/>
+
+                    <HBox spacing="8">
+                        <Button text="🖨️ Print" onAction="#handlePrint"
+                                HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                                style="-fx-background-color: #DBEAFE;
+                                       -fx-text-fill: #1D4ED8; -fx-padding: 10;
+                                       -fx-background-radius: 8; -fx-cursor: hand;"/>
+                        <Button text="✖ Clear" onAction="#clearForm"
+                                HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                                style="-fx-background-color: #F1F5F9;
+                                       -fx-text-fill: #475569; -fx-padding: 10;
+                                       -fx-background-radius: 8; -fx-cursor: hand;"/>
+                    </HBox>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </HBox>
+</VBox>

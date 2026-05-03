@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.clinic.controller.InventoryController"
+      spacing="0" style="-fx-background-color: #F8FAFC;">
+
+    <HBox alignment="CENTER_LEFT" spacing="16"
+          style="-fx-padding: 0 0 20 0;">
+        <VBox>
+            <Label text="Medicine Inventory"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;
+                          -fx-text-fill: #0F172A;"/>
+            <Label text="Track medicines, supplies and stock levels"
+                   style="-fx-font-size: 12px; -fx-text-fill: #64748B;"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="lowStockLabel"
+               style="-fx-background-color: #FEE2E2; -fx-text-fill: #DC2626;
+                      -fx-padding: 6 14; -fx-background-radius: 20;
+                      -fx-font-size: 12px; -fx-font-weight: bold;"/>
+        <Button text="➕  Add Item" onAction="#clearForm"
+                style="-fx-background-color: #F59E0B; -fx-text-fill: white;
+                       -fx-padding: 10 20; -fx-background-radius: 8;
+                       -fx-cursor: hand; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT"
+          style="-fx-padding: 0 0 16 0;">
+        <TextField fx:id="searchField"
+                   promptText="🔍  Search medicine or supply..."
+                   prefWidth="300"
+                   style="-fx-padding: 10 16; -fx-background-radius: 8;
+                          -fx-border-color: #E2E8F0; -fx-border-radius: 8;
+                          -fx-background-color: white;"/>
+        <ComboBox fx:id="filterCategory" promptText="All Categories"
+                  style="-fx-background-radius: 8;"/>
+        <Button text="⚠️ Low Stock Only" onAction="#showLowStock"
+                style="-fx-background-color: #FEF3C7; -fx-text-fill: #92400E;
+                       -fx-padding: 10 16; -fx-background-radius: 8;
+                       -fx-cursor: hand;"/>
+        <Button text="🔄 Reset" onAction="#resetFilter"
+                style="-fx-background-color: #F1F5F9; -fx-text-fill: #475569;
+                       -fx-padding: 10 16; -fx-background-radius: 8;
+                       -fx-cursor: hand;"/>
+    </HBox>
+
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+        <TableView fx:id="inventoryTable" HBox.hgrow="ALWAYS"
+                   style="-fx-background-color: white; -fx-background-radius: 12;
+                          -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.06),12,0,0,4);">
+            <columns>
+                <TableColumn fx:id="colId"       text="ID"        prefWidth="55"/>
+                <TableColumn fx:id="colName"     text="Item Name" prefWidth="180"/>
+                <TableColumn fx:id="colCategory" text="Category"  prefWidth="120"/>
+                <TableColumn fx:id="colQty"      text="Quantity"  prefWidth="90"/>
+                <TableColumn fx:id="colUnit"     text="Unit"      prefWidth="80"/>
+                <TableColumn fx:id="colReorder"  text="Reorder"   prefWidth="80"/>
+                <TableColumn fx:id="colExpiry"   text="Expiry"    prefWidth="110"/>
+                <TableColumn fx:id="colStatus"   text="Status"    prefWidth="100"/>
+            </columns>
+        </TableView>
+
+        <!-- FORM -->
+        <VBox prefWidth="280" spacing="0"
+              style="-fx-background-color: white; -fx-background-radius: 12;
+                     -fx-effect: dropshadow(gaussian,rgba(0,0,0,0.06),12,0,0,4);">
+
+            <VBox style="-fx-padding: 16 20; -fx-background-color: #F59E0B;
+                         -fx-background-radius: 12 12 0 0;">
+                <Label fx:id="formTitle" text="Add Item"
+                       style="-fx-font-size: 15px; -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+                <Label text="Medicine or supply details"
+                       style="-fx-font-size: 11px; -fx-text-fill: #FEF3C7;"/>
+            </VBox>
+
+            <VBox spacing="10" style="-fx-padding: 16;">
+                <Label text="ITEM NAME *"
+                       style="-fx-font-size: 11px; -fx-text-fill: #64748B;
+                              -fx-font-weight: bold;"/>
+                <TextField fx:id="nameField" promptText="e.g. Paracetamol 500mg"
+                           style="-fx-padding: 10; -fx-border-color: #E2E8F0;
+                                  -fx-border-radius: 8;"/>
+
+                <Label text="CATEGORY"
+                       style="-fx-font-size: 11px; -fx-text-fill: #64748B;
+                              -fx-font-weight: bold;"/>
+                <ComboBox fx:id="categoryCombo" maxWidth="Infinity"
+                          style="-fx-font-size: 13px;" editable="true"/>
+
+                <HBox spacing="8">
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="QUANTITY *"
+                               style="-fx-font-size: 10px; -fx-text-fill: #64748B;"/>
+                        <TextField fx:id="qtyField" promptText="0"
+                                   style="-fx-padding: 10; -fx-border-color: #E2E8F0;
+                                          -fx-border-radius: 6;"/>
+                    </VBox>
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="UNIT"
+                               style="-fx-font-size: 10px; -fx-text-fill: #64748B;"/>
+                        <TextField fx:id="unitField" promptText="tablet"
+                                   style="-fx-padding: 10; -fx-border-color: #E2E8F0;
+                                          -fx-border-radius: 6;"/>
+                    </VBox>
+                </HBox>
+
+                <Label text="REORDER LEVEL"
+                       style="-fx-font-size: 11px; -fx-text-fill: #64748B;
+                              -fx-font-weight: bold;"/>
+                <TextField fx:id="reorderField" promptText="e.g. 10"
+                           style="-fx-padding: 10; -fx-border-color: #E2E8F0;
+                                  -fx-border-radius: 8;"/>
+
+                <Label text="EXPIRY DATE"
+                       style="-fx-font-size: 11px; -fx-text-fill: #64748B;
+                              -fx-font-weight: bold;"/>
+                <DatePicker fx:id="expiryPicker" maxWidth="Infinity"/>
+
+                <Label fx:id="statusLabel" text="" wrapText="true"
+                       style="-fx-font-size: 12px;"/>
+
+                <Button fx:id="saveButton" text="💾  Save Item"
+                        maxWidth="Infinity" onAction="#handleSave"
+                        style="-fx-background-color: #F59E0B; -fx-text-fill: white;
+                               -fx-padding: 12; -fx-background-radius: 8;
+                               -fx-cursor: hand; -fx-font-weight: bold;"/>
+
+                <HBox spacing="8">
+                    <Button text="🗑️ Delete" onAction="#handleDelete"
+                            HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                            style="-fx-background-color: #FEE2E2;
+                                   -fx-text-fill: #DC2626; -fx-padding: 10;
+                                   -fx-background-radius: 8; -fx-cursor: hand;"/>
+                    <Button text="✖ Clear" onAction="#clearForm"
+                            HBox.hgrow="ALWAYS" maxWidth="Infinity"
+                            style="-fx-background-color: #F1F5F9;
+                                   -fx-text-fill: #475569; -fx-padding: 10;
+                                   -fx-background-radius: 8; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </HBox>
+</VBox>
