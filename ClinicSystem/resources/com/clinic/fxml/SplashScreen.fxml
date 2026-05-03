@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.clinic.controller.SplashController"
+           prefWidth="600" prefHeight="400"
+           style="-fx-background-color: #0F172A;">
+
+    <VBox alignment="CENTER" spacing="20">
+
+        <!-- Animated Logo -->
+        <StackPane>
+            <Circle fx:id="logoCircle" radius="60"
+                    style="-fx-fill: #1D4ED8;"/>
+            <Label text="🏥"
+                   style="-fx-font-size: 48px;"/>
+        </StackPane>
+
+        <!-- Title -->
+        <VBox alignment="CENTER" spacing="6">
+            <Label fx:id="titleLabel"
+                   text="BHC Management System"
+                   style="-fx-font-size: 28px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: white;"/>
+            <Label text="Barangay Health Center"
+                   style="-fx-font-size: 14px;
+                          -fx-text-fill: #60A5FA;"/>
+            <Label text="Professional Edition v2.0"
+                   style="-fx-font-size: 11px;
+                          -fx-text-fill: #475569;"/>
+        </VBox>
+
+        <!-- Loading Bar -->
+        <VBox alignment="CENTER" spacing="8"
+              style="-fx-padding: 0 80;">
+            <ProgressBar fx:id="progressBar"
+                         progress="0" prefWidth="400"
+                         style="-fx-accent: #1D4ED8;
+                                -fx-background-color: #1E293B;
+                                -fx-background-radius: 10;
+                                -fx-pref-height: 6;"/>
+            <Label fx:id="loadingLabel"
+                   text="Initializing..."
+                   style="-fx-font-size: 12px;
+                          -fx-text-fill: #64748B;"/>
+        </VBox>
+
+        <!-- Footer -->
+        <Label text="© 2024 Computer Engineering Thesis Project"
+               style="-fx-font-size: 10px;
+                      -fx-text-fill: #1E293B;"/>
+    </VBox>
+</StackPane>
