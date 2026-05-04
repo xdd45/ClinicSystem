@@ -15,7 +15,7 @@ public class Main extends Application {
             getClass().getResource(
                 "/com/clinic/fxml/SplashScreen.fxml"));
         stage.setTitle(
-            "HOSPITAL NG MGA LEGENDS.....");
+            "HOSPITAL NG MGA epic.");
         stage.setScene(new Scene(splash, 700, 420));
         stage.setResizable(false);
         stage.show();
