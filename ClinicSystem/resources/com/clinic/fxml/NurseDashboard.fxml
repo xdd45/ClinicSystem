@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.clinic.controller.NurseDashboardController"
+            style="-fx-background-color: #F8FAFC;">
+    <left>
+        <VBox prefWidth="240"
+              style="-fx-background-color: #451A03;">
+
+            <VBox style="-fx-padding: 24 20;
+                         -fx-background-color: #292524;">
+                <HBox spacing="12"
+                      alignment="CENTER_LEFT">
+                    <StackPane>
+                        <Circle radius="20"
+                                style="-fx-fill: #F59E0B;"/>
+                        <Label text="👩‍⚕️"
+                               style="-fx-font-size: 14px;"/>
+                    </StackPane>
+                    <VBox>
+                        <Label text="Nurse Portal"
+                               style="-fx-font-size: 14px;
+                                      -fx-font-weight: bold;
+                                      -fx-text-fill: white;"/>
+                        <Label fx:id="roleLabel"
+                               text="Nurse / Staff"
+                               style="-fx-font-size: 11px;
+                                      -fx-text-fill: #FCD34D;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT"
+                  style="-fx-padding: 12 16;
+                         -fx-background-color: #78350F;">
+                <Label text="👤"
+                       style="-fx-font-size: 16px;"/>
+                <Label fx:id="userLabel"
+                       style="-fx-font-size: 12px;
+                              -fx-text-fill: #FEF3C7;
+                              -fx-font-weight: bold;"/>
+            </HBox>
+
+            <Separator
+                style="-fx-background-color: #78350F;"/>
+
+            <Label text="MAIN MENU"
+                   style="-fx-font-size: 10px;
+                          -fx-text-fill: #FCD34D;
+                          -fx-padding: 16 20 8 20;
+                          -fx-font-weight: bold;"/>
+
+            <Button text="📊   Dashboard"
+                    maxWidth="Infinity"
+                    onAction="#showDashboard"
+                    style="-fx-background-color: #F59E0B;
+                           -fx-text-fill: white;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 12 20;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;"/>
+            <Button text="👥   Patients"
+                    maxWidth="Infinity"
+                    onAction="#showPatients"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #FEF3C7;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 12 20;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;"/>
+            <Button text="📅   Appointments"
+                    maxWidth="Infinity"
+                    onAction="#showAppointments"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #FEF3C7;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 12 20;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;"/>
+            <Button text="💊   Inventory"
+                    maxWidth="Infinity"
+                    onAction="#showInventory"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #FEF3C7;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 12 20;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+            <Separator
+                style="-fx-background-color: #78350F;"/>
+            <Button text="🚪   Sign Out"
+                    maxWidth="Infinity"
+                    onAction="#handleLogout"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #FCA5A5;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 14 20;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;"/>
+        </VBox>
+    </left>
+    <center>
+        <VBox>
+            <HBox alignment="CENTER_LEFT" spacing="16"
+                  style="-fx-background-color: white;
+                         -fx-padding: 16 24;
+                         -fx-effect: dropshadow(gaussian,
+                           rgba(0,0,0,0.06),8,0,0,2);">
+                <Label fx:id="pageTitle"
+                       text="Dashboard"
+                       style="-fx-font-size: 18px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: #0F172A;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="clockLabel"
+                       style="-fx-font-size: 12px;
+                              -fx-text-fill: #64748B;
+                              -fx-background-color: #F1F5F9;
+                              -fx-padding: 4 12;
+                              -fx-background-radius: 20;"/>
+            </HBox>
+            <StackPane fx:id="contentArea"
+                       style="-fx-padding: 24;"
+                       VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </center>
+</BorderPane>

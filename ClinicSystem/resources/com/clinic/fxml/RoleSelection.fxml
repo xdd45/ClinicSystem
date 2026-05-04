@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.clinic.controller.RoleSelectionController"
+           prefWidth="900" prefHeight="580"
+           style="-fx-background-color: #0F172A;">
+
+    <VBox alignment="CENTER" spacing="40">
+
+        <!-- Header -->
+        <VBox alignment="CENTER" spacing="8">
+            <StackPane>
+                <Circle radius="45"
+                        style="-fx-fill: #1D4ED8;"/>
+                <Label text="🏥"
+                       style="-fx-font-size: 36px;"/>
+            </StackPane>
+            <Label text="BHC Management System"
+                   style="-fx-font-size: 26px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: white;"/>
+            <Label text="Barangay Health Center"
+                   style="-fx-font-size: 13px;
+                          -fx-text-fill: #60A5FA;"/>
+            <Label text="Please select your role to continue"
+                   style="-fx-font-size: 12px;
+                          -fx-text-fill: #475569;
+                          -fx-padding: 8 0 0 0;"/>
+        </VBox>
+
+        <!-- Role Cards -->
+        <HBox spacing="20" alignment="CENTER">
+
+            <!-- ADMIN -->
+            <VBox fx:id="adminCard" alignment="CENTER"
+                  spacing="12" prefWidth="160" prefHeight="180"
+                  onMouseClicked="#selectAdmin"
+                  style="-fx-background-color: #1E293B;
+                         -fx-background-radius: 16;
+                         -fx-padding: 24;
+                         -fx-cursor: hand;
+                         -fx-border-color: #1D4ED8;
+                         -fx-border-width: 2;
+                         -fx-border-radius: 16;">
+                <Label text="👑"
+                       style="-fx-font-size: 36px;"/>
+                <Label text="Admin"
+                       style="-fx-font-size: 16px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+                <Label text="Full System Access"
+                       wrapText="true"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #64748B;
+                              -fx-text-alignment: center;"/>
+            </VBox>
+
+            <!-- DOCTOR -->
+            <VBox fx:id="doctorCard" alignment="CENTER"
+                  spacing="12" prefWidth="160" prefHeight="180"
+                  onMouseClicked="#selectDoctor"
+                  style="-fx-background-color: #1E293B;
+                         -fx-background-radius: 16;
+                         -fx-padding: 24;
+                         -fx-cursor: hand;
+                         -fx-border-color: #059669;
+                         -fx-border-width: 2;
+                         -fx-border-radius: 16;">
+                <Label text="👨‍⚕️"
+                       style="-fx-font-size: 36px;"/>
+                <Label text="Doctor"
+                       style="-fx-font-size: 16px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+                <Label text="Medical Records &amp; Appointments"
+                       wrapText="true"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #64748B;
+                              -fx-text-alignment: center;"/>
+            </VBox>
+
+            <!-- NURSE -->
+            <VBox fx:id="nurseCard" alignment="CENTER"
+                  spacing="12" prefWidth="160" prefHeight="180"
+                  onMouseClicked="#selectNurse"
+                  style="-fx-background-color: #1E293B;
+                         -fx-background-radius: 16;
+                         -fx-padding: 24;
+                         -fx-cursor: hand;
+                         -fx-border-color: #F59E0B;
+                         -fx-border-width: 2;
+                         -fx-border-radius: 16;">
+                <Label text="👩‍⚕️"
+                       style="-fx-font-size: 36px;"/>
+                <Label text="Nurse / Staff"
+                       style="-fx-font-size: 16px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+                <Label text="Patients &amp; Appointments"
+                       wrapText="true"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #64748B;
+                              -fx-text-alignment: center;"/>
+            </VBox>
+
+            <!-- PATIENT -->
+            <VBox fx:id="patientCard" alignment="CENTER"
+                  spacing="12" prefWidth="160" prefHeight="180"
+                  onMouseClicked="#selectPatient"
+                  style="-fx-background-color: #1E293B;
+                         -fx-background-radius: 16;
+                         -fx-padding: 24;
+                         -fx-cursor: hand;
+                         -fx-border-color: #8B5CF6;
+                         -fx-border-width: 2;
+                         -fx-border-radius: 16;">
+                <Label text="🧑"
+                       style="-fx-font-size: 36px;"/>
+                <Label text="Patient"
+                       style="-fx-font-size: 16px;
+                              -fx-font-weight: bold;
+                              -fx-text-fill: white;"/>
+                <Label text="View My Records"
+                       wrapText="true"
+                       style="-fx-font-size: 11px;
+                              -fx-text-fill: #64748B;
+                              -fx-text-alignment: center;"/>
+            </VBox>
+
+        </HBox>
+
+        <Label text="v2.0 Professional Edition  |  
+                     Barangay Health Center"
+               style="-fx-font-size: 10px;
+                      -fx-text-fill: #1E293B;"/>
+    </VBox>
+</StackPane>

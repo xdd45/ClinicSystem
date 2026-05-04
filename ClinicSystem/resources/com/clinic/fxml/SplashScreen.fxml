@@ -28,7 +28,7 @@
             <Label text="Barangay Health Center"
                    style="-fx-font-size: 14px;
                           -fx-text-fill: #60A5FA;"/>
-            <Label text="Professional Edition v2.0"
+            <Label text="LESSON LEARNED: WAG MAGSELPON"
                    style="-fx-font-size: 11px;
                           -fx-text-fill: #475569;"/>
         </VBox>
@@ -44,12 +44,12 @@
                                 -fx-pref-height: 6;"/>
             <Label fx:id="loadingLabel"
                    text="Initializing..."
-                   style="-fx-font-size: 12px;
+                   style="-fx-font-size: 14px;
                           -fx-text-fill: #64748B;"/>
         </VBox>
 
         <!-- Footer -->
-        <Label text="© 2024 Computer Engineering Thesis Project"
+        <Label text=":]]"
                style="-fx-font-size: 10px;
                       -fx-text-fill: #1E293B;"/>
     </VBox>

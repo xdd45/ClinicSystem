@@ -15,8 +15,8 @@ public class Main extends Application {
             getClass().getResource(
                 "/com/clinic/fxml/SplashScreen.fxml"));
         stage.setTitle(
-            "BHC Management System — Loading...");
-        stage.setScene(new Scene(splash, 600, 400));
+            "HOSPITAL NG MGA LEGENDS.....");
+        stage.setScene(new Scene(splash, 700, 420));
         stage.setResizable(false);
         stage.show();
     }
