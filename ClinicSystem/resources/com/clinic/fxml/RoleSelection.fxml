@@ -13,10 +13,10 @@
         <!-- Header -->
         <VBox alignment="CENTER" spacing="8">
             <StackPane>
-                <Circle radius="45"
+                <Circle radius="50"
                         style="-fx-fill: #1D4ED8;"/>
                 <Label text="🏥"
-                       style="-fx-font-size: 36px;"/>
+                       style="-fx-font-size: 38px;"/>
             </StackPane>
             <Label text="BHC Management System"
                    style="-fx-font-size: 26px;
@@ -31,109 +31,93 @@
                           -fx-padding: 8 0 0 0;"/>
         </VBox>
 
-        <!-- Role Cards -->
-        <HBox spacing="20" alignment="CENTER">
+        <!-- Role Cards — 3 cards only -->
+        <HBox spacing="24" alignment="CENTER">
 
             <!-- ADMIN -->
-            <VBox fx:id="adminCard" alignment="CENTER"
-                  spacing="12" prefWidth="160" prefHeight="180"
+            <VBox fx:id="adminCard"
+                  alignment="CENTER"
+                  spacing="14"
+                  prefWidth="200"
+                  prefHeight="200"
                   onMouseClicked="#selectAdmin"
                   style="-fx-background-color: #1E293B;
                          -fx-background-radius: 16;
-                         -fx-padding: 24;
+                         -fx-padding: 30;
                          -fx-cursor: hand;
                          -fx-border-color: #1D4ED8;
                          -fx-border-width: 2;
                          -fx-border-radius: 16;">
                 <Label text="👑"
-                       style="-fx-font-size: 36px;"/>
+                       style="-fx-font-size: 42px;"/>
                 <Label text="Admin"
-                       style="-fx-font-size: 16px;
+                       style="-fx-font-size: 18px;
                               -fx-font-weight: bold;
                               -fx-text-fill: white;"/>
                 <Label text="Full System Access"
                        wrapText="true"
-                       style="-fx-font-size: 11px;
+                       style="-fx-font-size: 12px;
                               -fx-text-fill: #64748B;
                               -fx-text-alignment: center;"/>
             </VBox>
 
             <!-- DOCTOR -->
-            <VBox fx:id="doctorCard" alignment="CENTER"
-                  spacing="12" prefWidth="160" prefHeight="180"
+            <VBox fx:id="doctorCard"
+                  alignment="CENTER"
+                  spacing="14"
+                  prefWidth="200"
+                  prefHeight="200"
                   onMouseClicked="#selectDoctor"
                   style="-fx-background-color: #1E293B;
                          -fx-background-radius: 16;
-                         -fx-padding: 24;
+                         -fx-padding: 30;
                          -fx-cursor: hand;
                          -fx-border-color: #059669;
                          -fx-border-width: 2;
                          -fx-border-radius: 16;">
                 <Label text="👨‍⚕️"
-                       style="-fx-font-size: 36px;"/>
+                       style="-fx-font-size: 42px;"/>
                 <Label text="Doctor"
-                       style="-fx-font-size: 16px;
+                       style="-fx-font-size: 18px;
                               -fx-font-weight: bold;
                               -fx-text-fill: white;"/>
-                <Label text="Medical Records &amp; Appointments"
+                <Label text="Medical Records &amp; Assign Nurses"
                        wrapText="true"
-                       style="-fx-font-size: 11px;
+                       style="-fx-font-size: 12px;
                               -fx-text-fill: #64748B;
                               -fx-text-alignment: center;"/>
             </VBox>
 
             <!-- NURSE -->
-            <VBox fx:id="nurseCard" alignment="CENTER"
-                  spacing="12" prefWidth="160" prefHeight="180"
+            <VBox fx:id="nurseCard"
+                  alignment="CENTER"
+                  spacing="14"
+                  prefWidth="200"
+                  prefHeight="200"
                   onMouseClicked="#selectNurse"
                   style="-fx-background-color: #1E293B;
                          -fx-background-radius: 16;
-                         -fx-padding: 24;
+                         -fx-padding: 30;
                          -fx-cursor: hand;
                          -fx-border-color: #F59E0B;
                          -fx-border-width: 2;
                          -fx-border-radius: 16;">
                 <Label text="👩‍⚕️"
-                       style="-fx-font-size: 36px;"/>
+                       style="-fx-font-size: 42px;"/>
                 <Label text="Nurse / Staff"
-                       style="-fx-font-size: 16px;
+                       style="-fx-font-size: 18px;
                               -fx-font-weight: bold;
                               -fx-text-fill: white;"/>
-                <Label text="Patients &amp; Appointments"
+                <Label text="Assignments &amp; Patient Care"
                        wrapText="true"
-                       style="-fx-font-size: 11px;
-                              -fx-text-fill: #64748B;
-                              -fx-text-alignment: center;"/>
-            </VBox>
-
-            <!-- PATIENT -->
-            <VBox fx:id="patientCard" alignment="CENTER"
-                  spacing="12" prefWidth="160" prefHeight="180"
-                  onMouseClicked="#selectPatient"
-                  style="-fx-background-color: #1E293B;
-                         -fx-background-radius: 16;
-                         -fx-padding: 24;
-                         -fx-cursor: hand;
-                         -fx-border-color: #8B5CF6;
-                         -fx-border-width: 2;
-                         -fx-border-radius: 16;">
-                <Label text="🧑"
-                       style="-fx-font-size: 36px;"/>
-                <Label text="Patient"
-                       style="-fx-font-size: 16px;
-                              -fx-font-weight: bold;
-                              -fx-text-fill: white;"/>
-                <Label text="View My Records"
-                       wrapText="true"
-                       style="-fx-font-size: 11px;
+                       style="-fx-font-size: 12px;
                               -fx-text-fill: #64748B;
                               -fx-text-alignment: center;"/>
             </VBox>
 
         </HBox>
 
-        <Label text="v2.0 Professional Edition  |  
-                     Barangay Health Center"
+        <Label text="v2.0 Professional Edition  |  Barangay Health Center"
                style="-fx-font-size: 10px;
                       -fx-text-fill: #1E293B;"/>
     </VBox>
