@@ -10,9 +10,11 @@
         <VBox prefWidth="240"
               style="-fx-background-color: #064E3B;">
 
+            <!-- Header -->
             <VBox style="-fx-padding: 24 20;
                          -fx-background-color: #022C22;">
-                <HBox spacing="12" alignment="CENTER_LEFT">
+                <HBox spacing="12"
+                      alignment="CENTER_LEFT">
                     <StackPane>
                         <Circle radius="20"
                                 style="-fx-fill: #059669;"/>
@@ -32,7 +34,9 @@
                 </HBox>
             </VBox>
 
-            <HBox spacing="10" alignment="CENTER_LEFT"
+            <!-- User info -->
+            <HBox spacing="10"
+                  alignment="CENTER_LEFT"
                   style="-fx-padding: 12 16;
                          -fx-background-color: #065F46;">
                 <Label text="👤"
@@ -52,6 +56,7 @@
                           -fx-padding: 16 20 8 20;
                           -fx-font-weight: bold;"/>
 
+            <!-- Nav Buttons -->
             <Button text="📊   Dashboard"
                     maxWidth="Infinity"
                     onAction="#showDashboard"
@@ -60,7 +65,9 @@
                            -fx-alignment: CENTER_LEFT;
                            -fx-padding: 12 20;
                            -fx-font-size: 13px;
-                           -fx-cursor: hand;"/>
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
+
             <Button text="👥   My Patients"
                     maxWidth="Infinity"
                     onAction="#showPatients"
@@ -69,7 +76,9 @@
                            -fx-alignment: CENTER_LEFT;
                            -fx-padding: 12 20;
                            -fx-font-size: 13px;
-                           -fx-cursor: hand;"/>
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
+
             <Button text="📅   Appointments"
                     maxWidth="Infinity"
                     onAction="#showAppointments"
@@ -78,7 +87,9 @@
                            -fx-alignment: CENTER_LEFT;
                            -fx-padding: 12 20;
                            -fx-font-size: 13px;
-                           -fx-cursor: hand;"/>
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
+
             <Button text="🩺   Medical Records"
                     maxWidth="Infinity"
                     onAction="#showMedicalRecords"
@@ -87,7 +98,9 @@
                            -fx-alignment: CENTER_LEFT;
                            -fx-padding: 12 20;
                            -fx-font-size: 13px;
-                           -fx-cursor: hand;"/>
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
+
             <Button text="📋   Patient History"
                     maxWidth="Infinity"
                     onAction="#showPatientHistory"
@@ -96,11 +109,26 @@
                            -fx-alignment: CENTER_LEFT;
                            -fx-padding: 12 20;
                            -fx-font-size: 13px;
-                           -fx-cursor: hand;"/>
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
+
+            <!-- Nurse Assignment Button -->
+            <Button text="👩‍⚕️   Assign Nurses"
+                    maxWidth="Infinity"
+                    onAction="#showNurseAssignment"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #D1FAE5;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 12 20;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
 
             <Region VBox.vgrow="ALWAYS"/>
+
             <Separator
                 style="-fx-background-color: #065F46;"/>
+
             <Button text="🚪   Sign Out"
                     maxWidth="Infinity"
                     onAction="#handleLogout"
@@ -109,11 +137,15 @@
                            -fx-alignment: CENTER_LEFT;
                            -fx-padding: 14 20;
                            -fx-font-size: 13px;
-                           -fx-cursor: hand;"/>
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
         </VBox>
     </left>
+
+    <!-- CONTENT AREA -->
     <center>
         <VBox>
+            <!-- Top Bar -->
             <HBox alignment="CENTER_LEFT" spacing="16"
                   style="-fx-background-color: white;
                          -fx-padding: 16 24;
@@ -132,6 +164,8 @@
                               -fx-padding: 4 12;
                               -fx-background-radius: 20;"/>
             </HBox>
+
+            <!-- Main Content -->
             <StackPane fx:id="contentArea"
                        style="-fx-padding: 24;"
                        VBox.vgrow="ALWAYS"/>

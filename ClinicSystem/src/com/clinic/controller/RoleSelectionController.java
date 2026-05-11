@@ -14,28 +14,27 @@ public class RoleSelectionController {
     @FXML private VBox adminCard;
     @FXML private VBox doctorCard;
     @FXML private VBox nurseCard;
-    @FXML private VBox patientCard;
 
     @FXML
     public void initialize() {
-        // Add hover animations to all cards
         addHoverEffect(adminCard);
         addHoverEffect(doctorCard);
         addHoverEffect(nurseCard);
-        addHoverEffect(patientCard);
     }
 
     private void addHoverEffect(VBox card) {
         card.setOnMouseEntered(e -> {
-            ScaleTransition st = new ScaleTransition(
-                Duration.millis(150), card);
+            ScaleTransition st =
+                new ScaleTransition(
+                    Duration.millis(150), card);
             st.setToX(1.08);
             st.setToY(1.08);
             st.play();
         });
         card.setOnMouseExited(e -> {
-            ScaleTransition st = new ScaleTransition(
-                Duration.millis(150), card);
+            ScaleTransition st =
+                new ScaleTransition(
+                    Duration.millis(150), card);
             st.setToX(1.0);
             st.setToY(1.0);
             st.play();
@@ -54,22 +53,17 @@ public class RoleSelectionController {
         openLogin("Nurse", "#F59E0B");
     }
 
-    @FXML private void selectPatient() {
-        openLogin("Patient", "#8B5CF6");
-    }
-
     private void openLogin(String role, String color) {
         try {
-            // Pass selected role to LoginController
             LoginController.setSelectedRole(role);
             LoginController.setRoleColor(color);
-
             Parent root = FXMLLoader.load(
                 getClass().getResource(
                     "/com/clinic/fxml/Login.fxml"));
             Stage stage = (Stage) adminCard
                 .getScene().getWindow();
-            stage.setScene(new Scene(root, 900, 580));
+            stage.setScene(
+                new Scene(root, 1000, 620));
             stage.setTitle(
                 "BHC System — " + role + " Login");
         } catch (Exception e) {

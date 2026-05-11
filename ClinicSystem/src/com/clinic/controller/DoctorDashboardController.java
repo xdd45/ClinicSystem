@@ -1,16 +1,26 @@
 package com.clinic.controller;
 
 import com.clinic.db.DatabaseManager;
-import javafx.animation.*;
-import javafx.fxml.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.sql.*;
-import java.time.LocalDate;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -26,6 +36,7 @@ public class DoctorDashboardController {
     public void initialize() {
         userLabel.setText(
             LoginController.getLoggedInUser());
+        roleLabel.setText("Doctor");
         startClock();
         showDashboard();
     }
@@ -48,18 +59,17 @@ public class DoctorDashboardController {
         VBox content = new VBox(20);
         content.setStyle("-fx-padding: 4;");
 
-        String hour = String.valueOf(
-            LocalTime.now().getHour());
+        // Greeting
+        int hour = LocalTime.now().getHour();
         String greeting =
-            Integer.parseInt(hour) < 12
-                ? "Good Morning"
-                : Integer.parseInt(hour) < 18
-                    ? "Good Afternoon"
-                    : "Good Evening";
+            hour < 12 ? "Good Morning"
+            : hour < 18 ? "Good Afternoon"
+            : "Good Evening";
 
         Label greet = new Label(
             greeting + ", " +
-            LoginController.getLoggedInUser() + "! 👋");
+            LoginController.getLoggedInUser() +
+            "! 👋");
         greet.setStyle(
             "-fx-font-size:20px;" +
             "-fx-font-weight:bold;" +
@@ -71,48 +81,71 @@ public class DoctorDashboardController {
             "-fx-font-size:13px;" +
             "-fx-text-fill:#64748B;");
 
+        // Stat cards
         HBox cards = new HBox(16);
         cards.getChildren().addAll(
-            statCard("👥", "My Patients",
+            statCard("👥", "Total Patients",
                 getCount(
                     "SELECT COUNT(*) FROM patients"),
                 "#059669"),
             statCard("📅", "Today's Appointments",
                 getCount(
                     "SELECT COUNT(*) FROM appointments " +
-                    "WHERE appointment_date = CURRENT_DATE " +
+                    "WHERE appointment_date = " +
+                    "CURRENT_DATE " +
                     "AND status = 'Scheduled'"),
                 "#1D4ED8"),
             statCard("✅", "Completed Today",
                 getCount(
                     "SELECT COUNT(*) FROM appointments " +
-                    "WHERE appointment_date = CURRENT_DATE " +
+                    "WHERE appointment_date = " +
+                    "CURRENT_DATE " +
                     "AND status = 'Completed'"),
-                "#8B5CF6")
+                "#8B5CF6"),
+            statCard("👩‍⚕️", "Active Assignments",
+                getCount(
+                    "SELECT COUNT(*) FROM " +
+                    "nurse_assignments " +
+                    "WHERE status IN " +
+                    "('Pending','In Progress')"),
+                "#F59E0B")
         );
 
-        // Today's patient list
-        Label todayTitle = new Label(
+        // Today's appointments table
+        Label apptTitle = new Label(
             "📅  Today's Patients");
-        todayTitle.setStyle(
+        apptTitle.setStyle(
             "-fx-font-size:15px;" +
             "-fx-font-weight:bold;" +
             "-fx-text-fill:#0F172A;");
 
-        TableView<String[]> table =
+        TableView<String[]> todayTable =
             buildTodayTable();
 
-        content.getChildren().addAll(
-            greet, sub, cards, todayTitle, table);
+        // Nurse assignments summary
+        Label assignTitle = new Label(
+            "👩‍⚕️  Recent Nurse Assignments");
+        assignTitle.setStyle(
+            "-fx-font-size:15px;" +
+            "-fx-font-weight:bold;" +
+            "-fx-text-fill:#0F172A;");
 
-        contentArea.getChildren().setAll(
-            new ScrollPane(content) {{
-                setFitToWidth(true);
-                setStyle(
-                    "-fx-background-color:transparent;" +
-                    "-fx-background:transparent;");
-            }}
+        TableView<String[]> assignTable =
+            buildAssignmentSummaryTable();
+
+        content.getChildren().addAll(
+            greet, sub, cards,
+            apptTitle, todayTable,
+            assignTitle, assignTable
         );
+
+        ScrollPane scroll = new ScrollPane(content);
+        scroll.setFitToWidth(true);
+        scroll.setStyle(
+            "-fx-background-color: transparent;" +
+            "-fx-background: transparent;");
+
+        contentArea.getChildren().setAll(scroll);
     }
 
     private VBox statCard(String icon, String title,
@@ -127,24 +160,25 @@ public class DoctorDashboardController {
             "-fx-border-color:" + color + ";" +
             "-fx-border-width:0 0 0 4;" +
             "-fx-border-radius:0 12 12 0;" +
-            "-fx-min-width:180;"
+            "-fx-min-width:160;"
         );
         HBox.setHgrow(card, Priority.ALWAYS);
 
         HBox top = new HBox(8);
-        top.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+        top.setAlignment(
+            javafx.geometry.Pos.CENTER_LEFT);
         Label iconL = new Label(icon);
-        iconL.setStyle("-fx-font-size:20px;");
+        iconL.setStyle("-fx-font-size:18px;");
         Label titleL = new Label(title);
         titleL.setStyle(
-            "-fx-font-size:12px;" +
+            "-fx-font-size:11px;" +
             "-fx-text-fill:#64748B;" +
             "-fx-font-weight:bold;");
         top.getChildren().addAll(iconL, titleL);
 
         Label valueL = new Label(value);
         valueL.setStyle(
-            "-fx-font-size:32px;" +
+            "-fx-font-size:30px;" +
             "-fx-font-weight:bold;" +
             "-fx-text-fill:" + color + ";");
 
@@ -154,40 +188,43 @@ public class DoctorDashboardController {
 
     @SuppressWarnings("unchecked")
     private TableView<String[]> buildTodayTable() {
-        TableView<String[]> table = new TableView<>();
-        table.setPrefHeight(250);
+        TableView<String[]> table =
+            new TableView<>();
+        table.setPrefHeight(200);
         table.setStyle(
             "-fx-background-color:white;" +
             "-fx-background-radius:12;" +
             "-fx-effect:dropshadow(gaussian," +
             "rgba(0,0,0,0.06),12,0,0,4);");
 
-        TableColumn<String[], String> c1 =
-            makeCol("Time", 0, 100);
-        TableColumn<String[], String> c2 =
-            makeCol("Patient", 1, 200);
-        TableColumn<String[], String> c3 =
-            makeCol("Reason", 2, 200);
-        TableColumn<String[], String> c4 =
-            makeCol("Status", 3, 120);
-        table.getColumns().addAll(c1, c2, c3, c4);
+        table.getColumns().addAll(
+            makeCol("Time",    0, 100),
+            makeCol("Patient", 1, 200),
+            makeCol("Reason",  2, 200),
+            makeCol("Status",  3, 120)
+        );
 
         try {
             String sql =
                 "SELECT a.appointment_time::text, " +
                 "p.full_name, " +
-                "COALESCE(a.reason,'—'), a.status " +
+                "COALESCE(a.reason,'—'), " +
+                "a.status " +
                 "FROM appointments a " +
-                "JOIN patients p ON a.patient_id=p.id " +
-                "WHERE a.appointment_date=CURRENT_DATE " +
+                "JOIN patients p " +
+                "ON a.patient_id = p.id " +
+                "WHERE a.appointment_date = " +
+                "CURRENT_DATE " +
                 "ORDER BY a.appointment_time";
-            ResultSet rs = DatabaseManager.getConnection()
-                .prepareStatement(sql).executeQuery();
+            ResultSet rs = DatabaseManager
+                .getConnection()
+                .prepareStatement(sql)
+                .executeQuery();
             while (rs.next()) {
                 String t = rs.getString(1);
                 table.getItems().add(new String[]{
                     t != null && t.length() >= 5
-                        ? t.substring(0,5) : "—",
+                        ? t.substring(0, 5) : "—",
                     rs.getString(2),
                     rs.getString(3),
                     rs.getString(4)
@@ -199,7 +236,70 @@ public class DoctorDashboardController {
 
         if (table.getItems().isEmpty()) {
             table.setPlaceholder(new Label(
-                "No appointments scheduled for today."));
+                "No appointments today."));
+        }
+        return table;
+    }
+
+    @SuppressWarnings("unchecked")
+    private TableView<String[]>
+            buildAssignmentSummaryTable() {
+        TableView<String[]> table =
+            new TableView<>();
+        table.setPrefHeight(180);
+        table.setStyle(
+            "-fx-background-color:white;" +
+            "-fx-background-radius:12;" +
+            "-fx-effect:dropshadow(gaussian," +
+            "rgba(0,0,0,0.06),12,0,0,4);");
+
+        table.getColumns().addAll(
+            makeCol("Nurse",   0, 160),
+            makeCol("Patient", 1, 160),
+            makeCol("Task",    2, 200),
+            makeCol("Status",  3, 110),
+            makeCol("Date",    4, 110)
+        );
+
+        try {
+            String sql =
+                "SELECT un.full_name, " +
+                "p.full_name, " +
+                "COALESCE(" +
+                "na.task_description,'—'), " +
+                "na.status, " +
+                "na.assigned_at::text " +
+                "FROM nurse_assignments na " +
+                "JOIN users un " +
+                "ON na.nurse_id = un.id " +
+                "JOIN patients p " +
+                "ON na.patient_id = p.id " +
+                "ORDER BY na.assigned_at DESC " +
+                "LIMIT 8";
+            ResultSet rs = DatabaseManager
+                .getConnection()
+                .prepareStatement(sql)
+                .executeQuery();
+            while (rs.next()) {
+                String date = rs.getString(5);
+                table.getItems().add(new String[]{
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    date != null &&
+                        date.length() >= 10
+                        ? date.substring(0, 10)
+                        : "—"
+                });
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        if (table.getItems().isEmpty()) {
+            table.setPlaceholder(new Label(
+                "No nurse assignments yet."));
         }
         return table;
     }
@@ -211,50 +311,79 @@ public class DoctorDashboardController {
             new TableColumn<>(title);
         col.setPrefWidth(width);
         col.setCellValueFactory(d ->
-            new javafx.beans.property.SimpleStringProperty(
+            new SimpleStringProperty(
                 ((String[]) d.getValue())[idx]));
         return col;
     }
 
     private String getCount(String sql) {
         try {
-            ResultSet rs = DatabaseManager.getConnection()
-                .prepareStatement(sql).executeQuery();
+            ResultSet rs = DatabaseManager
+                .getConnection()
+                .prepareStatement(sql)
+                .executeQuery();
             if (rs.next())
-                return String.valueOf(rs.getInt(1));
+                return String.valueOf(
+                    rs.getInt(1));
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
         return "0";
     }
 
-    @FXML private void showPatients() {
-        loadPage("/com/clinic/fxml/Patient.fxml",
+    // --- Navigation Methods ---
+
+    @FXML
+    private void showPatients() {
+        loadPage(
+            "/com/clinic/fxml/Patient.fxml",
             "My Patients");
     }
-    @FXML private void showAppointments() {
-        loadPage("/com/clinic/fxml/Appointment.fxml",
+
+    @FXML
+    private void showAppointments() {
+        loadPage(
+            "/com/clinic/fxml/Appointment.fxml",
             "Appointments");
     }
-    @FXML private void showMedicalRecords() {
-        loadPage("/com/clinic/fxml/MedicalRecord.fxml",
+
+    @FXML
+    private void showMedicalRecords() {
+        loadPage(
+            "/com/clinic/fxml/MedicalRecord.fxml",
             "Medical Records");
     }
-    @FXML private void showPatientHistory() {
-        loadPage("/com/clinic/fxml/PatientHistory.fxml",
+
+    @FXML
+    private void showPatientHistory() {
+        loadPage(
+            "/com/clinic/fxml/PatientHistory.fxml",
             "Patient History");
     }
 
-    private void loadPage(String path, String title) {
+    @FXML
+    private void showNurseAssignment() {
+        loadPage(
+            "/com/clinic/fxml/NurseAssignment.fxml",
+            "Assign Nurses");
+    }
+
+    private void loadPage(
+            String path, String title) {
         pageTitle.setText(title);
         try {
             Parent page = FXMLLoader.load(
                 getClass().getResource(path));
             contentArea.getChildren().setAll(page);
         } catch (Exception e) {
-            contentArea.getChildren().setAll(
-                new Label("⚠️ Error: " +
-                    e.getMessage()));
+            Label err = new Label(
+                "⚠️ Error loading page: " +
+                e.getMessage());
+            err.setStyle(
+                "-fx-text-fill:#DC2626;" +
+                "-fx-font-size:14px;");
+            contentArea.getChildren().setAll(err);
+            e.printStackTrace();
         }
     }
 
@@ -263,10 +392,12 @@ public class DoctorDashboardController {
         try {
             Parent role = FXMLLoader.load(
                 getClass().getResource(
-                    "/com/clinic/fxml/RoleSelection.fxml"));
+                    "/com/clinic/fxml/" +
+                    "RoleSelection.fxml"));
             Stage stage = (Stage) contentArea
                 .getScene().getWindow();
-            stage.setScene(new Scene(role, 900, 580));
+            stage.setScene(
+                new Scene(role, 900, 580));
             stage.setTitle(
                 "BHC System — Select Role");
         } catch (Exception e) {

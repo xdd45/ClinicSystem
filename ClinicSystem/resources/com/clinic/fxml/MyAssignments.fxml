@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.clinic.controller.MyAssignmentsController"
+      spacing="0"
+      style="-fx-background-color: #F8FAFC;">
+
+    <!-- HEADER -->
+    <HBox alignment="CENTER_LEFT" spacing="16"
+          style="-fx-padding: 0 0 16 0;">
+        <VBox>
+            <Label text="My Assignments"
+                   style="-fx-font-size: 20px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #0F172A;"/>
+            <Label text="Patients assigned to you by the doctor"
+                   style="-fx-font-size: 12px;
+                          -fx-text-fill: #64748B;"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="pendingBadge"
+               text=""
+               style="-fx-background-color: #FEE2E2;
+                      -fx-text-fill: #DC2626;
+                      -fx-padding: 6 14;
+                      -fx-background-radius: 20;
+                      -fx-font-size: 12px;
+                      -fx-font-weight: bold;"/>
+        <Button text="🔄 Refresh"
+                onAction="#loadAssignments"
+                style="-fx-background-color: #F1F5F9;
+                       -fx-text-fill: #475569;
+                       -fx-padding: 10 16;
+                       -fx-background-radius: 8;
+                       -fx-cursor: hand;"/>
+    </HBox>
+
+    <!-- FILTER -->
+    <HBox spacing="10" alignment="CENTER_LEFT"
+          style="-fx-padding: 0 0 16 0;">
+        <ComboBox fx:id="filterStatus"
+                  promptText="All Status"
+                  style="-fx-background-radius: 8;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="countLabel"
+               style="-fx-font-size: 12px;
+                      -fx-text-fill: #64748B;"/>
+    </HBox>
+
+    <!-- ASSIGNMENTS LIST -->
+    <ScrollPane fitToWidth="true"
+                VBox.vgrow="ALWAYS"
+                style="-fx-background: transparent;
+                       -fx-background-color: transparent;">
+
+        <VBox fx:id="assignmentCards"
+              spacing="12"
+              style="-fx-padding: 4;">
+            <Label text="Loading assignments..."
+                   style="-fx-text-fill: #94A3B8;
+                          -fx-font-size: 13px;"/>
+        </VBox>
+    </ScrollPane>
+
+    <!-- Status message -->
+    <Label fx:id="statusLabel" text=""
+           wrapText="true"
+           style="-fx-font-size: 13px;
+                  -fx-padding: 8 0 0 0;"/>
+</VBox>

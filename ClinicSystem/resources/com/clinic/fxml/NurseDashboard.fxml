@@ -10,6 +10,7 @@
         <VBox prefWidth="240"
               style="-fx-background-color: #451A03;">
 
+            <!-- Header -->
             <VBox style="-fx-padding: 24 20;
                          -fx-background-color: #292524;">
                 <HBox spacing="12"
@@ -33,7 +34,9 @@
                 </HBox>
             </VBox>
 
-            <HBox spacing="10" alignment="CENTER_LEFT"
+            <!-- User info -->
+            <HBox spacing="10"
+                  alignment="CENTER_LEFT"
                   style="-fx-padding: 12 16;
                          -fx-background-color: #78350F;">
                 <Label text="👤"
@@ -53,15 +56,30 @@
                           -fx-padding: 16 20 8 20;
                           -fx-font-weight: bold;"/>
 
-            <Button text="📊   Dashboard"
+            <!-- My Assignments — highlighted first -->
+            <Button text="📋   My Assignments"
                     maxWidth="Infinity"
-                    onAction="#showDashboard"
+                    onAction="#showMyAssignments"
                     style="-fx-background-color: #F59E0B;
                            -fx-text-fill: white;
                            -fx-alignment: CENTER_LEFT;
                            -fx-padding: 12 20;
                            -fx-font-size: 13px;
-                           -fx-cursor: hand;"/>
+                           -fx-cursor: hand;
+                           -fx-font-weight: bold;
+                           -fx-border-color: transparent;"/>
+
+            <Button text="📊   Dashboard"
+                    maxWidth="Infinity"
+                    onAction="#showDashboard"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: #FEF3C7;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 12 20;
+                           -fx-font-size: 13px;
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
+
             <Button text="👥   Patients"
                     maxWidth="Infinity"
                     onAction="#showPatients"
@@ -70,7 +88,9 @@
                            -fx-alignment: CENTER_LEFT;
                            -fx-padding: 12 20;
                            -fx-font-size: 13px;
-                           -fx-cursor: hand;"/>
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
+
             <Button text="📅   Appointments"
                     maxWidth="Infinity"
                     onAction="#showAppointments"
@@ -79,7 +99,9 @@
                            -fx-alignment: CENTER_LEFT;
                            -fx-padding: 12 20;
                            -fx-font-size: 13px;
-                           -fx-cursor: hand;"/>
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
+
             <Button text="💊   Inventory"
                     maxWidth="Infinity"
                     onAction="#showInventory"
@@ -88,11 +110,14 @@
                            -fx-alignment: CENTER_LEFT;
                            -fx-padding: 12 20;
                            -fx-font-size: 13px;
-                           -fx-cursor: hand;"/>
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
 
             <Region VBox.vgrow="ALWAYS"/>
+
             <Separator
                 style="-fx-background-color: #78350F;"/>
+
             <Button text="🚪   Sign Out"
                     maxWidth="Infinity"
                     onAction="#handleLogout"
@@ -101,11 +126,15 @@
                            -fx-alignment: CENTER_LEFT;
                            -fx-padding: 14 20;
                            -fx-font-size: 13px;
-                           -fx-cursor: hand;"/>
+                           -fx-cursor: hand;
+                           -fx-border-color: transparent;"/>
         </VBox>
     </left>
+
+    <!-- CONTENT AREA -->
     <center>
         <VBox>
+            <!-- Top Bar -->
             <HBox alignment="CENTER_LEFT" spacing="16"
                   style="-fx-background-color: white;
                          -fx-padding: 16 24;
@@ -124,6 +153,8 @@
                               -fx-padding: 4 12;
                               -fx-background-radius: 20;"/>
             </HBox>
+
+            <!-- Main Content -->
             <StackPane fx:id="contentArea"
                        style="-fx-padding: 24;"
                        VBox.vgrow="ALWAYS"/>
