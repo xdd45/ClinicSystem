@@ -88,6 +88,36 @@ public class MedicalRecordController {
             (obs, old, n) -> applyFilter());
         filterDate.valueProperty().addListener(
             (obs, old, n) -> applyFilter());
+
+        // Role-based access: only Doctor can edit/add/delete medical records
+        // Admin can only view (read-only)
+        String role = com.clinic.db.SessionManager.getCurrentRole();
+        boolean canEdit = "Doctor".equalsIgnoreCase(role);
+
+        if (!canEdit) {
+            // Disable all form inputs
+            patientCombo.setDisable(true);
+            visitDatePicker.setDisable(true);
+            bpField.setDisable(true);
+            tempField.setDisable(true);
+            weightField.setDisable(true);
+            heightField.setDisable(true);
+            complaintArea.setDisable(true);
+            diagnosisArea.setDisable(true);
+            prescriptionArea.setDisable(true);
+            notesArea.setDisable(true);
+            saveButton.setDisable(true);
+            saveButton.setVisible(false);
+
+            // Show read-only banner
+            formTitle.setText("📋 Medical Records — View Only");
+            statusLabel.setText("ℹ️ Only doctors can add or edit medical records.");
+            statusLabel.setStyle(
+                "-fx-text-fill: #1D4ED8; -fx-font-size: 12px;" +
+                "-fx-padding: 6 10; -fx-background-color: #DBEAFE;" +
+                "-fx-background-radius: 6;"
+            );
+        }
     }
 
     private void setupColumns() {

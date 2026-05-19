@@ -51,6 +51,31 @@ public class AppointmentController {
         setupListeners();
         loadPatients();
         loadAppointments();
+
+        // Role-based access:
+        // Admin: view only (checklist: Appointments ✗)
+        // Doctor: view only — nurse lang makakagawa/edit
+        // Nurse: full access (can create and edit appointments)
+        String role = com.clinic.db.SessionManager.getCurrentRole();
+        boolean canEdit = "Nurse".equalsIgnoreCase(role);
+
+        if (!canEdit) {
+            patientCombo.setDisable(true);
+            datePicker.setDisable(true);
+            timeCombo.setDisable(true);
+            reasonField.setDisable(true);
+            statusCombo.setDisable(true);
+            notesArea.setDisable(true);
+            saveButton.setDisable(true);
+            saveButton.setVisible(false);
+            formTitle.setText("📅 Appointments — View Only");
+            statusLabel.setText("ℹ️ Only nurses can create or edit appointments.");
+            statusLabel.setStyle(
+                "-fx-text-fill: #1D4ED8; -fx-font-size: 12px;" +
+                "-fx-padding: 6 10; -fx-background-color: #DBEAFE;" +
+                "-fx-background-radius: 6;"
+            );
+        }
     }
 
     private void setupColumns() {

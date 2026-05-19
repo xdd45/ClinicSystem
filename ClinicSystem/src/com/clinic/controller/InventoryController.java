@@ -45,6 +45,29 @@ public class InventoryController {
         searchField.textProperty().addListener((o, old, n) -> applyFilter());
         filterCategory.valueProperty().addListener((o, old, n) -> applyFilter());
         loadInventory();
+
+        // Role-based access: only Admin can manage inventory
+        // Doctor and Nurse: no access (checklist: Inventory ✗ for both)
+        String role = com.clinic.db.SessionManager.getCurrentRole();
+        boolean canEdit = "Admin".equalsIgnoreCase(role);
+
+        if (!canEdit) {
+            nameField.setDisable(true);
+            categoryCombo.setDisable(true);
+            qtyField.setDisable(true);
+            unitField.setDisable(true);
+            reorderField.setDisable(true);
+            expiryPicker.setDisable(true);
+            saveButton.setDisable(true);
+            saveButton.setVisible(false);
+            formTitle.setText("💊 Inventory — View Only");
+            statusLabel.setText("ℹ️ Only admins can manage inventory.");
+            statusLabel.setStyle(
+                "-fx-text-fill: #1D4ED8; -fx-font-size: 12px;" +
+                "-fx-padding: 6 10; -fx-background-color: #DBEAFE;" +
+                "-fx-background-radius: 6;"
+            );
+        }
     }
 
     @SuppressWarnings("unchecked")

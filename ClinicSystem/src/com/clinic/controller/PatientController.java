@@ -48,6 +48,33 @@ public class PatientController {
         setupDropdowns();
         setupListeners();
         loadPatients();
+
+        // Role-based access control
+        // Admin: full access
+        // Doctor: full access
+        // Nurse: view only — cannot add, edit, or delete patients
+        String role = com.clinic.db.SessionManager.getCurrentRole();
+        boolean canEdit = "Admin".equalsIgnoreCase(role) || "Doctor".equalsIgnoreCase(role);
+
+        if (!canEdit) {
+            nameField.setDisable(true);
+            dobPicker.setDisable(true);
+            genderCombo.setDisable(true);
+            contactField.setDisable(true);
+            addressArea.setDisable(true);
+            emailField.setDisable(true);
+            bloodTypeCombo.setDisable(true);
+            philhealthField.setDisable(true);
+            saveButton.setDisable(true);
+            saveButton.setVisible(false);
+            formTitle.setText("👥 Patients — View Only");
+            statusLabel.setText("ℹ️ Nurses can view patient info but cannot make changes.");
+            statusLabel.setStyle(
+                "-fx-text-fill: #1D4ED8; -fx-font-size: 12px;" +
+                "-fx-padding: 6 10; -fx-background-color: #DBEAFE;" +
+                "-fx-background-radius: 6;"
+            );
+        }
     }
 
     private void setupTableColumns() {
@@ -235,6 +262,13 @@ public class PatientController {
 
     @FXML
     private void handleDelete() {
+        // Only Admin and Doctor can delete patients
+        String role = com.clinic.db.SessionManager.getCurrentRole();
+        if (!"Admin".equalsIgnoreCase(role) && !"Doctor".equalsIgnoreCase(role)) {
+            showStatus("⛔ You do not have permission to delete patients.", true);
+            return;
+        }
+
         Patient p = patientTable.getSelectionModel().getSelectedItem();
         if (p == null) { showStatus("Please select a patient first.", true); return; }
 

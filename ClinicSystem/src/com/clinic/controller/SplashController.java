@@ -53,10 +53,10 @@ public class SplashController {
     private void startLoading() {
         String[] steps = {
             "Connecting to database...",
-            "WAIT HUHU",
+            "Gumamit ng Radiant Armor para sa mga sustain dmg na mages",
             "WALA NA NASIRA NA BINUKSAN KASI",
             "PASIKAT KASE SI BALID",
-            "BAHALA KAU DYAN.."
+            "BAHALA KAU DYAN.." 
         };
 
         Timeline timeline = new Timeline();
