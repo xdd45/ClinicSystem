@@ -6,15 +6,17 @@
 <StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.clinic.controller.SplashController"
            prefWidth="600" prefHeight="400"
-           style="-fx-background-color: #0F172A;">
+           style="-fx-background-color: 
+#0F172A;">
 
     <VBox alignment="CENTER" spacing="20">
 
         <!-- Animated Logo -->
         <StackPane>
             <Circle fx:id="logoCircle" radius="60"
-                    style="-fx-fill: #1D4ED8;"/>
-            <Label text="🏥"
+                    style="-fx-fill: 
+#1D4ED8;"/>
+            <Label text=""
                    style="-fx-font-size: 48px;"/>
         </StackPane>
 
@@ -27,10 +29,12 @@
                           -fx-text-fill: white;"/>
             <Label text="Barangay Health Center"
                    style="-fx-font-size: 14px;
-                          -fx-text-fill: #60A5FA;"/>
+                          -fx-text-fill: 
+#60A5FA;"/>
             <Label text="LESSON LEARNED: WAG MAGSELPON"
                    style="-fx-font-size: 11px;
-                          -fx-text-fill: #475569;"/>
+                          -fx-text-fill: 
+#475569;"/>
         </VBox>
 
         <!-- Loading Bar -->
@@ -38,19 +42,23 @@
               style="-fx-padding: 0 80;">
             <ProgressBar fx:id="progressBar"
                          progress="0" prefWidth="400"
-                         style="-fx-accent: #1D4ED8;
-                                -fx-background-color: #1E293B;
+                         style="-fx-accent: 
+#1D4ED8;
+                                -fx-background-color: 
+#1E293B;
                                 -fx-background-radius: 10;
                                 -fx-pref-height: 6;"/>
             <Label fx:id="loadingLabel"
                    text="Initializing..."
                    style="-fx-font-size: 14px;
-                          -fx-text-fill: #64748B;"/>
+                          -fx-text-fill: 
+#64748B;"/>
         </VBox>
 
         <!-- Footer -->
         <Label text=":]]"
                style="-fx-font-size: 10px;
-                      -fx-text-fill: #1E293B;"/>
+                      -fx-text-fill: 
+#1E293B;"/>
     </VBox>
 </StackPane>

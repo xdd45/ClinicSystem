@@ -48,33 +48,6 @@ public class PatientController {
         setupDropdowns();
         setupListeners();
         loadPatients();
-
-        // Role-based access control
-        // Admin: full access
-        // Doctor: full access
-        // Nurse: view only — cannot add, edit, or delete patients
-        String role = com.clinic.db.SessionManager.getCurrentRole();
-        boolean canEdit = "Admin".equalsIgnoreCase(role) || "Doctor".equalsIgnoreCase(role);
-
-        if (!canEdit) {
-            nameField.setDisable(true);
-            dobPicker.setDisable(true);
-            genderCombo.setDisable(true);
-            contactField.setDisable(true);
-            addressArea.setDisable(true);
-            emailField.setDisable(true);
-            bloodTypeCombo.setDisable(true);
-            philhealthField.setDisable(true);
-            saveButton.setDisable(true);
-            saveButton.setVisible(false);
-            formTitle.setText("👥 Patients — View Only");
-            statusLabel.setText("ℹ️ Nurses can view patient info but cannot make changes.");
-            statusLabel.setStyle(
-                "-fx-text-fill: #1D4ED8; -fx-font-size: 12px;" +
-                "-fx-padding: 6 10; -fx-background-color: #DBEAFE;" +
-                "-fx-background-radius: 6;"
-            );
-        }
     }
 
     private void setupTableColumns() {
@@ -128,6 +101,26 @@ public class PatientController {
         // Live search as user types
         searchField.textProperty().addListener((obs, o, n) -> applyFilter());
         filterGender.valueProperty().addListener((obs, o, n) -> applyFilter());
+
+        // Block non-numeric characters in contact field
+        contactField.textProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal.matches("[0-9+\\-\\s]*"))
+                contactField.setText(oldVal);
+        });
+
+        // Live email border feedback
+        emailField.textProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal.trim().isEmpty()) {
+                emailField.setStyle("");
+                return;
+            }
+            boolean valid = newVal.trim().matches(
+                "^[\\w.+-]+@[\\w-]+\\.[a-zA-Z]{2,}$");
+            emailField.setStyle(
+                "-fx-border-color: " + (valid ? "#059669" : "#EF4444") + ";" +
+                "-fx-border-radius: 6;" +
+                "-fx-background-radius: 6;");
+        });
     }
 
     private void loadPatients() {
@@ -262,13 +255,6 @@ public class PatientController {
 
     @FXML
     private void handleDelete() {
-        // Only Admin and Doctor can delete patients
-        String role = com.clinic.db.SessionManager.getCurrentRole();
-        if (!"Admin".equalsIgnoreCase(role) && !"Doctor".equalsIgnoreCase(role)) {
-            showStatus("⛔ You do not have permission to delete patients.", true);
-            return;
-        }
-
         Patient p = patientTable.getSelectionModel().getSelectedItem();
         if (p == null) { showStatus("Please select a patient first.", true); return; }
 

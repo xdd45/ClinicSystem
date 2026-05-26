@@ -41,6 +41,8 @@ public class RegisterController {
     public void initialize() {
         setupRoleUI();
         setupUsernameChecker();
+        setupEmailChecker();
+        setupPhoneFilter();
     }
 
     private void setupRoleUI() {
@@ -143,6 +145,38 @@ public class RegisterController {
                 }
                 checkUsernameAvailability(
                     newVal.trim());
+            });
+    }
+
+    private void setupEmailChecker() {
+        emailField.textProperty().addListener(
+            (obs, oldVal, newVal) -> {
+                if (newVal.trim().isEmpty()) {
+                    emailField.setStyle(
+                        emailField.getStyle()
+                            .replace("#EF4444", "#E2E8F0"));
+                    return;
+                }
+                boolean valid = newVal.trim().matches(
+                    "^[\\w.+-]+@[\\w-]+\\.[a-zA-Z]{2,}$");
+                emailField.setStyle(
+                    "-fx-background-color: white;" +
+                    "-fx-border-color: " +
+                    (valid ? "#059669" : "#EF4444") + ";" +
+                    "-fx-border-radius: 8;" +
+                    "-fx-background-radius: 8;" +
+                    "-fx-padding: 11;" +
+                    "-fx-font-size: 13px;");
+            });
+    }
+
+    private void setupPhoneFilter() {
+        // Block non-numeric characters from being typed at all
+        phoneField.textProperty().addListener(
+            (obs, oldVal, newVal) -> {
+                if (!newVal.matches("[0-9+\\-\\s]*")) {
+                    phoneField.setText(oldVal);
+                }
             });
     }
 

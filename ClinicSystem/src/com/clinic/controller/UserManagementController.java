@@ -49,9 +49,15 @@ public class UserManagementController {
 
         setupColumns();
         roleCombo.setItems(FXCollections.observableArrayList(
-            "Admin", "Doctor", "Staff"
+            "Admin", "Doctor", "Nurse", "Patient"
         ));
         loadUsers();
+
+        // Block non-numeric characters in phone field
+        phoneField.textProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal.matches("[0-9+\\-\\s]*"))
+                phoneField.setText(oldVal);
+        });
     }
 
     private void setupColumns() {
@@ -344,6 +350,14 @@ public class UserManagementController {
             err.append("• Username cannot have spaces.\n");
         if (roleCombo.getValue() == null)
             err.append("• Please select a role.\n");
+        if (!emailField.getText().trim().isEmpty() &&
+            !emailField.getText().trim().matches(
+                "^[\\w.+-]+@[\\w-]+\\.[a-zA-Z]{2,}$"))
+            err.append("• Email format is invalid.\n");
+        if (!phoneField.getText().trim().isEmpty() &&
+            !phoneField.getText().trim().matches(
+                "^[0-9+\\-\\s]{7,15}$"))
+            err.append("• Phone number format is invalid.\n");
         if (err.length() > 0) {
             showStatus(err.toString(), true);
             return false;

@@ -137,7 +137,7 @@ public class BillingController {
 
     private void setupDropdowns() {
         statusCombo.setItems(FXCollections.observableArrayList(
-            "Unpid", "Pid", "MedjoPid"
+            "Unpaid", "Paid", "Partial"
         ));
         statusCombo.setValue("Unpaid");
 
